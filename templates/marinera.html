@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>マリネラの魅力 | マリネラ・ミ・アルマ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CDN -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- カスタムCSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    /* マリネラページ専用のスタイル */
+    .hero-marinera {
+      background: url('{{ url_for('static', filename='images/marinera-hero.jpg') }}') center center no-repeat;
+      background-size: cover;
+      height: 60vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+    .hero-marinera::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    .hero-marinera h1 {
+      position: relative;
+      z-index: 1;
+      font-size: 3rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    }
+    .content-section {
+      padding: 60px 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- ナビゲーションバー（既存ページと統一） -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">マリネラ・ミ・アルマ</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">ホーム</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#about">教室紹介</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/marinera">マリネラ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/instructors">講師紹介</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/classes">クラス</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contact">お問い合わせ</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+<!-- ヒーローセクション -->
+<header class="hero-marinera position-relative" style="height: 60vh;">
+    <!-- 背景画像要素（絶対配置） -->
+    <img src="{{ url_for('static', filename='images/マリネラトップ.jpg') }}" alt="マリネラヒーロー" 
+         class="position-absolute w-100 h-100" 
+         style="object-fit: cover; top:0; left:0; z-index: 1;">
+    
+    <!-- オーバーレイ -->
+    <div class="hero-overlay position-absolute w-100 h-100" 
+         style="top:0; left:0; background: rgba(0,0,0,0.5); z-index: 2;"></div>
+    
+    <!-- ヒーローテキスト -->
+    <div class="container text-center position-relative" style="z-index: 3; display: flex; align-items: center; justify-content: center; height: 100%;">
+      <h1 class="text-white" style="font-size: 3rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
+        マリネラって何？
+      </h1>
+    </div>
+  </header>
+  
+
+  <!-- メインコンテンツ -->
+  <main>
+    <!-- マリネラって何？ -->
+    <section class="content-section">
+      <div class="container">
+        <h2 class="mb-4">マリネラって何？</h2>
+        <p class="lead">マリネラ（Marinera）は、ペルーの国民的伝統舞踊であり、自由と笑顔があふれるダンスです。</p>
+        <div class="row">
+          <div class="col-md-6">
+            <img src="{{ url_for('static', filename='images/マリネラ1.jpg') }}" alt="マリネラダンス" class="img-fluid rounded shadow-lg">
+          </div>
+          <div class="col-md-6">
+            <p>ペルーでは学校で習うほどポピュラーなダンスで、『愛』を表現するため、男女のペアで踊るのが基本です。ペルー各地に「マリネラ」と呼ばれる8分の6拍子の踊りがありますが、その中でも最も有名で盛んなのが、ペルー北部の「マリネラ ノルテーニャ」です。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ペルーの国民舞踊としてのマリネラ -->
+    <section class="content-section bg-light">
+      <div class="container">
+        <h2 class="mb-4">ペルーの国民舞踊「マリネラ」</h2>
+        <p>Wikipediaによると、マリネラ(Marinera)とは、ペルー共和国を代表する伝統舞踊・競技ペアダンス及びその音楽のことです。ブラジルのサンバ、アルゼンチンのタンゴと共に、南米三大ダンスの一つに数えられ、ペルーの無形文化遺産にも指定されています。踊り手は白いハンカチを右手に持ち、6/8拍子のリズムで情熱的に踊ります。</p>
+      </div>
+    </section>
+
+    <!-- 多彩なスタイル -->
+    <section class="content-section">
+      <div class="container">
+        <h2 class="mb-4">多彩なスタイル</h2>
+        <p>マリネラには、主に以下の3種類のスタイルがあります。</p>
+        <ul>
+          <li><strong>ノルテーニャ：</strong>ペルー北部海岸地方、特にトルヒーヨ市を中心としたスタイル。最も盛んで、競技ダンスとしても発展。</li>
+          <li><strong>リメーニャ：</strong>首都リマのスタイル。</li>
+          <li><strong>セラーナ：</strong>アンデス山岳地方（プーノ、アヤクーチョ、アレキパなど）の様々なスタイルの総称。</li>
+        </ul>
+        <p>通常、「マリネラ」と呼ばれる場合は、最も盛んな「ノルテーニャ」を指します。</p>
+      </div>
+    </section>
+
+    <!-- 国際コンクールと競技性 -->
+    <section class="content-section bg-light">
+      <div class="container">
+        <h2 class="mb-4">競技としてのマリネラ</h2>
+        <p>ペルー北部のトルヒーヨ市では、毎年1月末に最も権威のある国際コンクールが開催され、このコンクールのチャンピオンが「マリネラのチャンピオン」として認定されます。女性は片手にスカートの端とハンカチを持ち裸足で、男性はつばの広い帽子とハンカチを持ち、常に笑顔で踊るのが特徴です。</p>
+      </div>
+    </section>
+
+    <!-- 自由な表現とアドリブの魅力 -->
+    <section class="content-section">
+      <div class="container">
+        <h2 class="mb-4">自由な表現とアドリブ</h2>
+        <p>マリネラは、あらかじめ決められた動きだけでなく、リードする女性がその場で動きを決めるアドリブ要素が豊富です。踊るたびにその瞬間だけの表現が生まれ、一度踊れば同じ踊りは二度と生まれません。初心者の方でも、踊りながら「自分はどう動きたいか」や「パートナーとどのようにコミュニケーションするか」を学べるのが魅力です。</p>
+      </div>
+    </section>
+
+    <!-- 個性豊かな表現 -->
+    <section class="content-section bg-light">
+      <div class="container">
+        <h2 class="mb-4">個性豊かな表現</h2>
+        <p>マリネラは基本的にペアダンスですが、シングルやグループでのパフォーマンスも行われ、子供からシニアまで各世代がそれぞれの『愛』を表現します。あなたにしかできない、唯一無二のマリネラが必ずあります。</p>
+      </div>
+    </section>
+
+    <!-- お問い合わせボタン -->
+    <section class="content-section text-center">
+      <div class="container">
+        <a href="#contact" class="btn btn-primary btn-lg">体験レッスンのお問い合わせはこちら</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- フッター -->
+  <footer class="py-4 bg-secondary text-white text-center">
+    <div class="container">
+      <p class="mb-0">&copy; 2025 マリネラ・ミ・アルマ. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- BootstrapのJSと依存ライブラリ -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

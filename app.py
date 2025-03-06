@@ -10,9 +10,9 @@ def index():
 def instructors():
     return render_template('instructors.html')
 
-@app.route('/classes')
-def classes():
-    return render_template('classes.html')
+@app.route('/marinera')
+def marinera():
+    return render_template('marinera.html')
 
 
 if __name__ == '__main__':
