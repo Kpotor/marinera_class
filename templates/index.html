@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>マリネラ・ミ・アルマ Marinera mi alma</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CDN -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- カスタムCSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <!-- ナビゲーションバー -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">マリネラ・ミ・アルマ Marinera mi alma</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#about">教室紹介 <span class="sr-only">(現位置)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#instructors">講師紹介</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#classes">クラス</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#schedule">スケジュール</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contact">お問い合わせ</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ヒーローセクション -->
+  <header class="hero-section text-center text-white">
+    <div class="container">
+      <h1 class="display-4">情熱とリズムのダンス教室</h1>
+      <p class="lead">初心者から上級者まで、あなたのステップを応援します</p>
+    </div>
+  </header>
+
+  <!-- 教室紹介セクション -->
+  <section id="about" class="py-5 modern-about">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6 order-md-2">
+          <img src="{{ url_for('static', filename='images/教室の風景.jpg') }}" alt="教室の風景" class="img-fluid rounded shadow-lg">
+        </div>
+        <div class="col-md-6 order-md-1">
+          <h2 class="mb-4">教室紹介</h2>
+          <p> ペルーダンスアカデミー「マリネラ・ミ・アルマ」</p>
+          <p> ペルー国民舞踊マリネラと民族舞踊の教室です。</p>
+          <p> 2012年に活動を開始し、今年で12年目を迎えます。ペルーの国民舞踊マリネラとペルー各地の民族舞踊を広める活動をしている団体です。 </p>
+          <a href="#contact" class="btn btn-primary mt-3">お問い合わせはこちら</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- 講師紹介セクション -->
+  <section id="instructors" class="py-5 modern-instructors">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <!-- 講師紹介用の画像（instructors.jpg は実際に配置する画像に合わせてください） -->
+          <img src="{{ url_for('static', filename='images/講師紹介.jpg') }}" alt="講師の風景" class="img-fluid rounded shadow-lg">
+        </div>
+        <div class="col-md-6">
+          <h2 class="mb-4">講師：福田千文（Fukuda Chifumi）</h2>
+          <p> 主宰者の福田千文は20年以上にわたりペルー各地の民族舞踊を学び、さらに2007年より本格的に南米三大舞踊の一つでありペルーの国民舞踊であるマリネラを踊り始める。</p>
+          <p> 数々のマリネラ世界チャンピオンに師事し2012年に東京都豊島区で教室を開校して以来（現在は練馬区）、現在に至るまで自身の研鑽のために渡秘を続けながら、団体をはじめとする後進の育成、地域のイベントなどへの積極的参加によるペルー舞踊の文化的普及にも力を入れている。</p>
+          <a href="/instructors" class="btn btn-secondary mt-3">詳しい講師紹介はこちら</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- レッスン情報セクション -->
+<section id="classes" class="bg-light py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">レッスン情報</h2>
+    <div class="row">
+      <!-- マリネラレッスン -->
+      <div class="col-md-6 col-lg-4">
+         <div class="card mb-4">
+           <img src="{{ url_for('static', filename='images/class_marinera.jpg') }}" class="card-img-top" alt="マリネラレッスン">
+           <div class="card-body">
+             <h5 class="card-title">マリネラレッスン</h5>
+             <p class="card-text">初心者から上級者まで、情熱とリズムに満ちたマリネラの世界を体験できます。</p>
+             <a href="/classes" class="btn btn-primary">詳しい情報</a>
+           </div>
+         </div>
+      </div>
+      <!-- ストレッチ・エクササイズ -->
+      <div class="col-md-6 col-lg-4">
+         <div class="card mb-4">
+           <img src="{{ url_for('static', filename='images/class_stretch.jpg') }}" class="card-img-top" alt="ストレッチ・エクササイズ">
+           <div class="card-body">
+             <h5 class="card-title">ストレッチ・エクササイズ</h5>
+             <p class="card-text">ダンスパフォーマンス向上と健康な身体作りをサポートするエクササイズクラス。</p>
+             <a href="/classes" class="btn btn-primary">詳しい情報</a>
+           </div>
+         </div>
+      </div>
+      <!-- ワークショップ & イベント -->
+      <div class="col-md-6 col-lg-4">
+         <div class="card mb-4">
+           <img src="{{ url_for('static', filename='images/class_workshop.jpg') }}" class="card-img-top" alt="ワークショップ & イベント">
+           <div class="card-body">
+             <h5 class="card-title">ワークショップ & イベント</h5>
+             <p class="card-text">特別な講師による集中トレーニングやイベントも随時開催中。</p>
+             <a href="/classes" class="btn btn-primary">詳しい情報</a>
+           </div>
+         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- スケジュールセクション -->
+  <section id="schedule" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">スケジュール</h2>
+      <p class="text-center">最新のレッスンスケジュールは随時更新中です。詳しくはお問い合わせください。</p>
+    </div>
+  </section>
+
+  <!-- お問い合わせセクション -->
+  <section id="contact" class="bg-dark text-white py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">お問い合わせ</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <form>
+            <div class="form-group">
+              <label for="name">お名前</label>
+              <input type="text" class="form-control" id="name" placeholder="お名前を入力してください">
+            </div>
+            <div class="form-group">
+              <label for="email">メールアドレス</label>
+              <input type="email" class="form-control" id="email" placeholder="メールアドレスを入力してください">
+            </div>
+            <div class="form-group">
+              <label for="message">メッセージ</label>
+              <textarea class="form-control" id="message" rows="4" placeholder="お問い合わせ内容を入力してください"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">送信</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer class="py-4 bg-secondary text-white text-center">
+    <div class="container">
+      <p class="mb-0">&copy; 2025 マリネラ・ミ・アルマ Marinera mi alma. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- BootstrapのJSと依存ライブラリ -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
