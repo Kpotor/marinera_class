@@ -41,29 +41,36 @@
   </style>
 </head>
 <body>
-  <!-- ナビゲーションバー（既存ページと統一） -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#">マリネラ・ミ・アルマ</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+  <!-- ナビゲーションバー -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+    <!-- ロゴ画像を配置 -->
+    <a class="navbar-brand" href="/">
+      <!-- 高さや余白は必要に応じて調整してください -->
+      <img src="{{ url_for('static', filename='images/教室ロゴ.png') }}"
+           alt="マリネラ・ミ・アルマ ロゴ"
+           style="height: 40px; margin-right: 10px;">
+      マリネラ・ミ・アルマ Marinera mi alma
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="/">ホーム</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#about">教室紹介</a>
-        </li>
         <li class="nav-item active">
-          <a class="nav-link" href="/marinera">マリネラ</a>
+          <a class="nav-link" href="#about">教室紹介 <span class="sr-only">(現位置)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/instructors">講師紹介</a>
+          <a class="nav-link" href="#instructors">講師紹介</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/classes">クラス</a>
+          <a class="nav-link" href="#classes">クラス</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#class-locations">場所</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#schedule">スケジュール</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#contact">お問い合わせ</a>
@@ -164,12 +171,32 @@
     </section>
   </main>
 
-  <!-- フッター -->
-  <footer class="py-4 bg-secondary text-white text-center">
-    <div class="container">
-      <p class="mb-0">&copy; 2025 マリネラ・ミ・アルマ. All Rights Reserved.</p>
+<!-- フッター -->
+<footer class="py-4 bg-secondary text-white text-center">
+  <div class="container">
+    <!-- SNSリンクを追加（直接画像を使用） -->
+    <div class="social-links mb-3">
+      <a href="https://www.youtube.com/@Marineramialma" target="_blank" class="mx-2">
+        <img src="{{ url_for('static', filename='images/yt_icon_rgb.png') }}" alt="YouTube" style="width:64px">
+      </a>
+      <a href="https://www.instagram.com/marinerachifumifukuda//" target="_blank" class="mx-2">
+        <img src="{{ url_for('static', filename='images/Instagram_Glyph_Gradient.png') }}" alt="Instagram" style="width:64px">
+      </a>
+      <a href="https://twitter.com/marineramialma" target="_blank" class="mx-2">
+        <img src="{{ url_for('static', filename='images/logo-black.png') }}" alt="X" style="width:64px">
+      </a>
+      <a href="https://www.tiktok.com/@marineramialma?lang=ja-JP" target="_blank" class="mx-2">
+        <img src="{{ url_for('static', filename='images/TikTok_Icon_Black_Circle.png') }}" alt="X" style="width:64px">
+      </a>
     </div>
-  </footer>
+    
+    <!-- ここに同じロゴを配置 -->
+    <img src="{{ url_for('static', filename='images/教室ロゴ.png') }}"
+         alt="マリネラ・ミ・アルマ ロゴ"
+         style="height: 300px; margin-bottom: 10px;">
+    <p class="mb-0">&copy; 2025 マリネラ・ミ・アルマ Marinera mi alma. All Rights Reserved.</p>
+  </div>
+</footer>
 
   <!-- BootstrapのJSと依存ライブラリ -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

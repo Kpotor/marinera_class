@@ -87,19 +87,38 @@
 </head>
 <body>
   <!-- ナビゲーションバー -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="/">マリネラ・ミ・アルマ</a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+    <!-- ロゴ画像を配置 -->
+    <a class="navbar-brand" href="/">
+      <!-- 高さや余白は必要に応じて調整してください -->
+      <img src="{{ url_for('static', filename='images/教室ロゴ.png') }}"
+           alt="マリネラ・ミ・アルマ ロゴ"
+           style="height: 40px; margin-right: 10px;">
+      マリネラ・ミ・アルマ Marinera mi alma
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="/">ホーム</a>
-        </li>
         <li class="nav-item active">
-          <a class="nav-link" href="/instructors">講師紹介 <span class="sr-only">(現位置)</span></a>
+          <a class="nav-link" href="#about">教室紹介 <span class="sr-only">(現位置)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#instructors">講師紹介</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#classes">クラス</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#class-locations">場所</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#schedule">スケジュール</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contact">お問い合わせ</a>
         </li>
       </ul>
     </div>
@@ -143,36 +162,399 @@
     </div>
   </section>
 
-  <!-- タイムライン：主な実績 -->
-  <section class="container">
-    <h3 class="mt-5">主な実績と歩み</h3>
-    <div class="timeline">
-      <div class="timeline-item">
-        <strong>2007年</strong> - マリネラ・ノルテーニャを本格的に始動。
+<!-- 動画セクション -->
+<section id="marinera-queen" class="py-5 modern-about">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <div class="embed-responsive embed-responsive-16by9 rounded shadow-lg">
+          <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/429s5Ih2fzk?si=d7tX6EzDf5SDao2F" 
+            title="YouTube video player" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+          </iframe>
+        </div>
       </div>
-      <div class="timeline-item">
-        <strong>2009年</strong> - ペルーへ渡り、マリネラを本格的に学ぶ。
-      </div>
-      <div class="timeline-item">
-        <strong>2012年</strong> - 東京豊島区にてマリネラ教室を開校。以降、練馬区を拠点に活動開始。
-      </div>
-      <div class="timeline-item">
-        <strong>2013年</strong> - 「マリネラ・リメーニャを踊る唯一の日本人」として特別賞を受賞。
-      </div>
-      <div class="timeline-item">
-        <strong>2014年</strong> - リマ市「ラ・プンタ」コンクールで2位入賞。
-      </div>
-      <div class="timeline-item">
-        <strong>2015年</strong> - 複数の国際大会で好成績を収め、テレビ出演も果たす。
-      </div>
-      <div class="timeline-item">
-        <strong>2021年</strong> - 江戸川区に新たな教室を開校、活動の幅を拡大。
-      </div>
-      <div class="timeline-item">
-        <strong>2023年</strong> - 日本人初のレイナとして、ペルー国内世界大会予選に参加。
+      <div class="col-md-6">
+        <p>日本人で初めてマリネラ女王を務めました。</p>
+        <p>こちらの動画では、マリネラの優美さと情熱をご覧いただけます。</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- KOBA式トレーニングセクション -->
+<section id="koba-training" class="py-5 bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center mb-4">
+        <h3 class="display-5">KOBA式体幹☆バランストレーニング <h3>
+          <h3 class="display-5"> 美BODYのライセンスとBライセンスを取得しました。</h3>
+      </div>
+    </div>
+    
+    <!-- 共通説明部分 -->
+    <div class="row mb-4">
+      <div class="col-md-10 mx-auto">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h4 class="card-title mb-3">KOBA☆トレとは</h4>
+            <p class="card-text">長友佑都選手のトレーナーである木場克己氏の考案した体幹＆バランスのトレーニングです。誰でもできるトレーニングで、踊れるからだ、けがをしないからだを作るお手伝いをしていきます。</p>
+            <p class="text-center mt-3">
+              <a href="http://kobakatsumi.jp/" target="_blank" class="btn btn-secondary">木場克己オフィシャルサイト</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 2つのライセンスを横並びで表示 -->
+    <div class="row">
+      <!-- 美BODYライセンス -->
+      <div class="col-md-6 mb-4">
+        <div class="card shadow-sm h-100">
+          <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">美BODYライセンス</h5>
+          </div>
+          <div class="card-body text-center">
+            <img src="{{ url_for('static', filename='images/美BODY.png') }}" alt="美BODYライセンス" class="img-fluid rounded mb-3" style="max-height: 250px;" onerror="this.src='https://via.placeholder.com/350x250?text=美BODYライセンス'; this.onerror='';">
+            <p class="card-text">特に女性に向けたトレーニングプログラムです。しなやかな筋力と柔軟性を兼ね備えた美しいボディラインづくりをサポートします。</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Bライセンス -->
+      <div class="col-md-6 mb-4">
+        <div class="card shadow-sm h-100">
+          <div class="card-header bg-success text-white">
+            <h5 class="mb-0">Bライセンス</h5>
+          </div>
+          <div class="card-body text-center">
+            <img src="{{ url_for('static', filename='images/Bライセンス.png') }}" alt="Bライセンス" class="img-fluid rounded mb-3" style="max-height: 250px;" onerror="this.src='https://via.placeholder.com/350x250?text=Bライセンス'; this.onerror='';">
+            <p class="card-text">幅広い年代の方に向けたトレーニングプログラムです。基礎的な体幹強化からバランス感覚の向上まで、総合的な身体能力向上を目指します。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- CTAボタン -->
+    <div class="row mt-3">
+      <div class="col-12 text-center">
+        <p class="font-italic lead" style="font-size: 1.5rem; font-weight: 500;">"体幹を鍛えて、より美しく優雅に踊りましょう"</p>
+        <a href="#" class="btn btn-outline-primary">ストレッチ＆エクササイズクラスも開講しています</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- タイムラインセクション -->
+<section class="container py-5 timeline-section">
+  <div class="text-center mb-4">
+    <h3 class="display-5">主な活動と実績</h3>
+    <div class="separator mx-auto my-3"></div>
+  </div>
+  
+  <div class="timeline">
+    <!-- 2007年 -->
+    <div class="timeline-item">
+      <div class="timeline-year">
+        <span class="badge badge-primary rounded-pill px-3 py-2">2007年</span>
+      </div>
+      <div class="timeline-content">
+        <p>マリネラ・ノルテーニャを本格的に始める。</p>
+      </div>
+    </div>
+    
+    <!-- 2009年 -->
+    <div class="timeline-item">
+      <div class="timeline-year">
+        <span class="badge badge-primary rounded-pill px-3 py-2">2009年</span>
+      </div>
+      <div class="timeline-content">
+        <p>ペルーへ渡り、マリネラを本格的に学ぶ。</p>
+        <p>韓国中央博物館ペルー展オープニングセレモニー民族舞踊グループにて参加。</p>
+      </div>
+    </div>
+    
+    <!-- 2011年 -->
+    <div class="timeline-item">
+      <div class="timeline-year">
+        <span class="badge badge-primary rounded-pill px-3 py-2">2011年</span>
+      </div>
+      <div class="timeline-content">
+        <p>ペルーへ短期留学し、多くの名だたるダンサーに師事。</p>
+      </div>
+    </div>
+    
+    <!-- 2012年 -->
+    <div class="timeline-item">
+      <div class="timeline-year">
+        <span class="badge badge-primary rounded-pill px-3 py-2">2012年</span>
+      </div>
+      <div class="timeline-content">
+        <p>8月：マリネラ教室を東京豊島区にて設立。</p>
+        <p>以降、毎年ペルーへ渡り、マリネラのチャンピオン達に師事：</p>
+        <ul class="mb-0">
+          <li>アンドレス・ハラ氏</li>
+          <li>クラウディア・オルナ氏</li>
+        </ul>
+        <p class="mt-2">マリネラ・リメーニャ、マリネラ・ノルテーニャともにコンクール出場を開始。</p>
+      </div>
+    </div>
+    
+    <!-- 2013年 -->
+    <div class="timeline-item">
+      <div class="timeline-year">
+        <span class="badge badge-primary rounded-pill px-3 py-2">2013年</span>
+      </div>
+      <div class="timeline-content">
+        <p><strong>マリネラ・リメーニャを踊る唯一の日本人</strong>という功績を認められる</p>
+        <p>第1回 マリネラ・リメーニャ・コンクール "シウダ・デ・ラ・プンタ"にて<span class="badge badge-warning">特別賞</span>を受賞。</p>
+      </div>
+    </div>
+    
+    <!-- 2014年 -->
+    <div class="timeline-item">
+      <div class="timeline-year">
+        <span class="badge badge-primary rounded-pill px-3 py-2">2014年</span>
+      </div>
+      <div class="timeline-content">
+        <ul>
+          <li>マリア・マルタ・レベルテ氏に師事</li>
+          <li>ペルー、リマ市"ラ・プンタ"コンクール<span class="badge badge-silver">第2位</span></li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- 2015年 -->
+    <div class="timeline-item">
+      <div class="timeline-year">
+        <span class="badge badge-primary rounded-pill px-3 py-2">2015年</span>
+      </div>
+      <div class="timeline-content">
+        <h5>国際大会で多数の入賞</h5>
+        <ul>
+          <li>クラブリベルタ第55回マリネラノルテーニャ国際大会・第5回世界大会にて<strong>第1決勝進出</strong></li>
+          <li>ペルー、リマ市"マラ"コンクール<span class="badge badge-silver">第2位</span></li>
+          <li>ペルー、リマ市"コマス"コンクール<span class="badge badge-bronze">第3位</span></li>
+          <li>ペルー、リマ市"アシバイラミペルー"コンクール<span class="badge badge-bronze">第3位</span></li>
+          <li>インターネットテレビ オンダデジタル出演</li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- 2016年 -->
+    <div class="timeline-item">
+      <div class="timeline-year">
+        <span class="badge badge-primary rounded-pill px-3 py-2">2016年</span>
+      </div>
+      <div class="timeline-content">
+        <ul>
+          <li><i class="fas fa-tv"></i> ぺルーのテレビ局<strong>AmericaＴＶ</strong>に出演</li>
+          <li>ペルー、リマ市 "アルコイリス"コンクール<span class="badge badge-silver">第2位</span></li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- 2017年 -->
+    <div class="timeline-item">
+      <div class="timeline-year">
+        <span class="badge badge-primary rounded-pill px-3 py-2">2017年</span>
+      </div>
+      <div class="timeline-content">
+        <p><i class="fas fa-tv"></i> ペルーのテレビ局<strong>TVPeru</strong>の番組「Una y mil voces」に出演</p>
+        <p><small class="text-muted">※ペルーではとても有名な音楽番組です</small></p>
+      </div>
+    </div>
+    
+    <!-- 2018年 -->
+    <div class="timeline-item">
+      <div class="timeline-year">
+        <span class="badge badge-primary rounded-pill px-3 py-2">2018年</span>
+      </div>
+      <div class="timeline-content">
+        <h5>各種コンクールで入賞・優勝</h5>
+        <ul>
+          <li>第2回 マリネラ・ノルテーニャ・コンクール"ミネロ・ペルー"<span class="badge badge-bronze">第3位</span></li>
+          <li>第4回 マリネラ・ノルテーニャ・コンクール"ぺルサ"<span class="badge badge-silver">第2位</span></li>
+          <li>第14回 マリネラ・ノルテーニャ・コンクール"アデラ・アオン"<span class="badge badge-bronze">第3位</span></li>
+          <li>第6回 マリネラ・ノルテーニャ・コンクール"カニェテ・エス・マリネラ"<span class="badge badge-gold">優勝</span></li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- 2022年 -->
+    <div class="timeline-item">
+      <div class="timeline-year">
+        <span class="badge badge-primary rounded-pill px-3 py-2">2022年</span>
+      </div>
+      <div class="timeline-content">
+        <h5>イベント出演・公演活動</h5>
+        <div class="row">
+          <div class="col-md-6">
+            <ul>
+              <li>Latido Andinoコンサート <small>(1月)</small></li>
+              <li>さいたまニコニコフェスティバルin川越 <small>(4月)</small></li>
+              <li>第3回ラテンアメリカへの道フェスティバル <small>(5月)</small></li>
+              <li>二つの黄金卿コンサート共催 <small>(5月)</small></li>
+              <li>東久留米市生涯学習センター主催イベントまろにえ祭り <small>(7月)</small></li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <ul>
+              <li>江東区民祭り <small>(10月)</small></li>
+              <li>船橋市国際交流協会インターナショナルフェスティバル <small>(10月)</small></li>
+              <li>下町フォルクローレフェスタ <small>(11月)</small></li>
+              <li>青梅アートフェスティバル <small>(11月)</small></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 2023年 -->
+    <div class="timeline-item">
+      <div class="timeline-year">
+        <span class="badge badge-primary rounded-pill px-3 py-2">2023年</span>
+      </div>
+      <div class="timeline-content">
+        <h5>国際活動と国内公演</h5>
+        <div class="row">
+          <div class="col-md-6">
+            <h6 class="text-primary">国内公演</h6>
+            <ul>
+              <li>千葉県内の小学校でのコンサート <small>(2月)</small></li>
+              <li>みんなのフォルクローレ祭 <small>(3月)</small></li>
+              <li>第28回所沢市国際交流フォーラム <small>(4月)</small></li>
+              <li>第4回ラテンアメリカへの道フェスティバル <small>(5月)</small></li>
+              <li>フォルクローレフェスタin荻窪 <small>(10月)</small></li>
+              <li>葛西まつり <small>(10月)</small></li>
+              <li>青梅アートフェスティバル <small>(11月)</small></li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <h6 class="text-danger">ペルー活動 - 特別功績</h6>
+            <ul>
+              <li><span class="badge badge-gold">マラ・セレクティーボ女王</span> <strong>(ペルー)</strong></li>
+              <li>ノベレス・コンクール <strong>(ペルー)</strong> <span class="badge badge-info">第一決勝進出</span> <small>(7月)</small></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 追加のバッジスタイル -->
+  <style>
+    .badge-gold {
+      background: linear-gradient(45deg, #FFD700, #FFA500);
+      color: #333;
+      font-weight: bold;
+    }
+    
+    .fas {
+      margin-right: 5px;
+    }
+  </style>
+  
+  <!-- タイムライン用のカスタムCSS -->
+  <style>
+    /* セパレーター */
+    .separator {
+      width: 80px;
+      height: 4px;
+      background-color: #007bff;
+      border-radius: 2px;
+    }
+    
+    /* タイムライン全体のスタイル改善 */
+    .timeline {
+      position: relative;
+      margin: 2rem 0;
+      padding-left: 3rem;
+    }
+    
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 15px;
+      width: 4px;
+      background: linear-gradient(to bottom, #007bff, #00c6ff);
+      border-radius: 2px;
+    }
+    
+    /* タイムラインの各アイテム */
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+      padding: 0 0 0 2rem;
+    }
+    
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: -8px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: white;
+      border: 4px solid #007bff;
+      z-index: 1;
+    }
+    
+    /* 年表示のスタイル */
+    .timeline-year {
+      margin-bottom: 0.75rem;
+    }
+    
+    /* コンテンツ部分のスタイル */
+    .timeline-content {
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      padding: 1.25rem;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+    }
+    
+    .timeline-content:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+    
+    /* バッジのカスタムスタイル */
+    .badge-silver {
+      background-color: #C0C0C0;
+      color: #333;
+    }
+    
+    .badge-bronze {
+      background-color: #CD7F32;
+      color: white;
+    }
+    
+    .badge-warning {
+      background-color: #ffc107;
+      color: #333;
+    }
+    
+    /* リストのスタイル調整 */
+    .timeline-content ul {
+      padding-left: 1.25rem;
+      margin-bottom: 0;
+    }
+    
+    .timeline-content li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .timeline-content li:last-child {
+      margin-bottom: 0;
+    }
+  </style>
+</section>
 
   <!-- ダンスへの誘い -->
   <section class="container mt-5 mb-5 text-center">
@@ -184,12 +566,32 @@
     <a href="/contact" class="btn btn-primary btn-lg mt-3">お問い合わせ・体験レッスンはこちら</a>
   </section>
 
-  <!-- フッター -->
-  <footer class="py-4 bg-secondary text-white text-center">
-    <div class="container">
-      <p class="mb-0">&copy; 2025 マリネラ・ミ・アルマ Marinera mi alma. All Rights Reserved.</p>
+<!-- フッター -->
+<footer class="py-4 bg-secondary text-white text-center">
+  <div class="container">
+    <!-- SNSリンクを追加（直接画像を使用） -->
+    <div class="social-links mb-3">
+      <a href="https://www.youtube.com/@Marineramialma" target="_blank" class="mx-2">
+        <img src="{{ url_for('static', filename='images/yt_icon_rgb.png') }}" alt="YouTube" style="width:64px">
+      </a>
+      <a href="https://www.instagram.com/marinerachifumifukuda//" target="_blank" class="mx-2">
+        <img src="{{ url_for('static', filename='images/Instagram_Glyph_Gradient.png') }}" alt="Instagram" style="width:64px">
+      </a>
+      <a href="https://twitter.com/marineramialma" target="_blank" class="mx-2">
+        <img src="{{ url_for('static', filename='images/logo-black.png') }}" alt="X" style="width:64px">
+      </a>
+      <a href="https://www.tiktok.com/@marineramialma?lang=ja-JP" target="_blank" class="mx-2">
+        <img src="{{ url_for('static', filename='images/TikTok_Icon_Black_Circle.png') }}" alt="X" style="width:64px">
+      </a>
     </div>
-  </footer>
+    
+    <!-- ここに同じロゴを配置 -->
+    <img src="{{ url_for('static', filename='images/教室ロゴ.png') }}"
+         alt="マリネラ・ミ・アルマ ロゴ"
+         style="height: 300px; margin-bottom: 10px;">
+    <p class="mb-0">&copy; 2025 マリネラ・ミ・アルマ Marinera mi alma. All Rights Reserved.</p>
+  </div>
+</footer>
 
   <!-- BootstrapのJSと依存ライブラリ -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
