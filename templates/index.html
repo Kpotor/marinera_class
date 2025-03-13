@@ -15,12 +15,18 @@
       object-fit: cover;   /* 画像の縦横比を保ちつつ、枠に合わせて切り抜く */
     }
   </style>
-  
 </head>
 <body>
   <!-- ナビゲーションバー -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#">マリネラ・ミ・アルマ Marinera mi alma</a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+    <!-- ロゴ画像を配置 -->
+    <a class="navbar-brand" href="#">
+      <!-- 高さや余白は必要に応じて調整してください -->
+      <img src="{{ url_for('static', filename='images/教室ロゴ.png') }}"
+           alt="マリネラ・ミ・アルマ ロゴ"
+           style="height: 40px; margin-right: 10px;">
+      マリネラ・ミ・アルマ Marinera mi alma
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -53,7 +59,7 @@
   <header class="hero-section text-center text-white">
     <div class="container">
       <h1 class="display-4">マリネラダンス教室</h1>
-      <p class="lead">初心者から上級者まで、あなたのステップを応援します</p>
+      <p class="lead">愛を語りましょう</p>
     </div>
   </header>
 
@@ -76,7 +82,7 @@
   </section>
   
   <!-- 講師紹介セクション -->
-  <section id="instructors" class="py-5 modern-instructors">
+  <section id="instructors" class="py-5 modern-about">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-md-6">
@@ -131,67 +137,103 @@
     </div>
   </section>
 
-    <!-- 教室場所情報セクション -->
-    <section id="class-locations" class="bg-light py-5">
-      <div class="container">
-        <h2 class="text-center mb-4">場所</h2>
-        <p class="text-center"> 3つの場所で教室を開いています</p>
-        <div class="row">
-          <!-- 江古田サンライズ教室 -->
-          <div class="col-md-4">
-            <div class="card mb-4">
-              <div class="card-body">
-                <h5 class="card-title">江古田サンライズ教室</h5>
-                <h6>場所: <a href="http://sunrisestudio.jimdo.com/" target="_blank">スタジオ・ラクーンBスタジオ</a></h6>
-                <ul class="list-unstyled">
-                  <li>住所: 東京都練馬区旭丘１－２６－４　サンライズマンションＢ１Ｆ</li>
-                  <li>TEL: 090-3918-3945</li>
-                  <li>アクセス:
-                    <ul>
-                      <li>西武池袋線「江古田駅」から徒歩7分</li>
-                      <li>西武池袋線「東長崎駅」から徒歩8分</li>
-                      <li>都営大江戸線「新江古田駅」から徒歩10分</li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
+
+
+  <!-- 教室場所情報セクション -->
+  <section id="class-locations" class="bg-light py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">場所</h2>
+      <p class="text-center"> 3つの場所で教室を開いています</p>
+      <div class="row">
+        <!-- 江古田サンライズ教室 -->
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title">江古田サンライズ教室</h5>
+              <h6>場所: <a href="http://sunrisestudio.jimdo.com/" target="_blank">サンライズスタジオ</a></h6>
+              <ul class="list-unstyled">
+                <li>住所: 東京都練馬区旭丘１－２６－４　サンライズマンションＢ１Ｆ</li>
+                <li>TEL: 090-3918-3945</li>
+                <li>アクセス:
+                  <ul>
+                    <li>西武池袋線「江古田駅」から徒歩7分</li>
+                    <li>西武池袋線「東長崎駅」から徒歩8分</li>
+                    <li>都営大江戸線「新江古田駅」から徒歩10分</li>
+                  </ul>
+                </li>
+              </ul>
             </div>
           </div>
-          <!-- 江古田ラクーン教室 -->
-          <div class="col-md-4">
-            <div class="card mb-4">
-              <div class="card-body">
-                <h5 class="card-title">江古田ラクーン教室</h5>
-                <h6>場所: <a href="http://www.studio-racoon.com/index.html" target="_blank">スタジオ・ラクーンBスタジオ</a></h6>
-                <ul class="list-unstyled">
-                  <li>住所: 東京都練馬区栄町38－3　浅間湯（センゲンユ）ビル2F</li>
-                  <li>TEL: 080-4183-2406</li>
-                  <li>アクセス:
-                    <ul>
-                      <li>西武池袋線「江古田駅」から徒歩2分</li>
-                      <li>西武有楽町線「新桜台駅」から徒歩5分</li>
-                      <li>都営大江戸線「新江古田駅」から徒歩10分</li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
+        </div>
+        <!-- 江古田ラクーン教室 -->
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title">江古田ラクーン教室</h5>
+              <h6>場所: <a href="http://www.studio-racoon.com/index.html" target="_blank">スタジオ・ラクーンBスタジオ</a></h6>
+              <ul class="list-unstyled">
+                <li>住所: 東京都練馬区栄町38－3　浅間湯（センゲンユ）ビル2F</li>
+                <li>TEL: 080-4183-2406</li>
+                <li>アクセス:
+                  <ul>
+                    <li>西武池袋線「江古田駅」から徒歩2分</li>
+                    <li>西武有楽町線「新桜台駅」から徒歩5分</li>
+                    <li>都営大江戸線「新江古田駅」から徒歩10分</li>
+                  </ul>
+                </li>
+              </ul>
             </div>
           </div>
-          <!-- 江戸川教室 -->
-          <div class="col-md-4">
-            <div class="card mb-4">
-              <div class="card-body">
-                <h5 class="card-title">江戸川教室</h5>
-                <h6>場所: <a href="https://www.city.edogawa.tokyo.jp/kuseijoho/gaiyo/shisetsuguide/bunya/bunkachiiki/index.html" target="_blank">江戸川区平井地区公共施設</a></h6>
-                <p>江戸川区内の各種公共施設を使用します。使用する施設は回ごとに変わります。</p>
-                <p>回ごとの使用する施設はレッスンスケジュールをご確認ください。</p>
-              </div>
+        </div>
+        <!-- 江戸川教室 -->
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title">江戸川教室</h5>
+              <h6>場所: <a href="https://www.city.edogawa.tokyo.jp/kuseijoho/gaiyo/shisetsuguide/bunya/bunkachiiki/index.html" target="_blank">江戸川区平井地区公共施設</a></h6>
+              <p>江戸川区内の各種公共施設を使用します。使用する施設は回ごとに変わります。</p>
+              <p>回ごとの使用する施設はレッスンスケジュールをご確認ください。</p>
             </div>
           </div>
         </div>
       </div>
-    </section>
-    <!--  -->
+    </div>
+  </section>
+
+<!-- 新着情報セクション -->
+<section id="news" class="py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">新着情報</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="news-scroll-container" style="max-height: 400px; overflow-y: auto; border: 1px solid #eee; border-radius: 5px;">
+          <div class="list-group list-group-flush">
+            {% if news %}
+              {% for item in news[:5] %}
+                <div class="list-group-item">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ item.title }}</h5>
+                    <small class="text-muted">{{ item.date_posted.strftime('%Y年%m月%d日') }}</small>
+                  </div>
+                  <div class="mb-1">{{ item.content|safe }}</div>
+                </div>
+              {% endfor %}
+              {% if news|length > 5 %}
+                <div class="list-group-item text-center">
+                  <a href="#" class="btn btn-sm btn-outline-secondary">すべての新着情報を見る</a>
+                </div>
+              {% endif %}
+            {% else %}
+              <div class="list-group-item text-center">
+                <p class="mb-0">現在、新着情報はありません。</p>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- スケジュールセクション -->
   <section id="schedule" class="py-5">
@@ -201,39 +243,33 @@
     </div>
   </section>
 
-  <!-- お問い合わせセクション -->
-  <section id="contact" class="bg-dark text-white py-5">
-    <div class="container">
-      <h2 class="text-center mb-4">お問い合わせ</h2>
-      <div class="row justify-content-center">
-        <div class="col-md-8">
-          <form>
-            <div class="form-group">
-              <label for="name">お名前</label>
-              <input type="text" class="form-control" id="name" placeholder="お名前を入力してください">
-            </div>
-            <div class="form-group">
-              <label for="email">メールアドレス</label>
-              <input type="email" class="form-control" id="email" placeholder="メールアドレスを入力してください">
-            </div>
-            <div class="form-group">
-              <label for="message">メッセージ</label>
-              <textarea class="form-control" id="message" rows="4" placeholder="お問い合わせ内容を入力してください"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">送信</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
 
-
-  <!-- フッター -->
-  <footer class="py-4 bg-secondary text-white text-center">
-    <div class="container">
-      <p class="mb-0">&copy; 2025 マリネラ・ミ・アルマ Marinera mi alma. All Rights Reserved.</p>
+<!-- フッター -->
+<footer class="py-4 bg-secondary text-white text-center">
+  <div class="container">
+    <!-- SNSリンクを追加（直接画像を使用） -->
+    <div class="social-links mb-3">
+      <a href="https://www.youtube.com/@Marineramialma" target="_blank" class="mx-2">
+        <img src="{{ url_for('static', filename='images/yt_icon_rgb.png') }}" alt="YouTube" style="width:64px">
+      </a>
+      <a href="https://www.instagram.com/marinerachifumifukuda//" target="_blank" class="mx-2">
+        <img src="{{ url_for('static', filename='images/Instagram_Glyph_Gradient.png') }}" alt="Instagram" style="width:64px">
+      </a>
+      <a href="https://twitter.com/marineramialma" target="_blank" class="mx-2">
+        <img src="{{ url_for('static', filename='images/logo-black.png') }}" alt="X" style="width:64px">
+      </a>
+      <a href="https://www.tiktok.com/@marineramialma?lang=ja-JP" target="_blank" class="mx-2">
+        <img src="{{ url_for('static', filename='images/TikTok_Icon_Black_Circle.png') }}" alt="X" style="width:64px">
+      </a>
     </div>
-  </footer>
+    
+    <!-- ここに同じロゴを配置 -->
+    <img src="{{ url_for('static', filename='images/教室ロゴ.png') }}"
+         alt="マリネラ・ミ・アルマ ロゴ"
+         style="height: 300px; margin-bottom: 10px;">
+    <p class="mb-0">&copy; 2025 マリネラ・ミ・アルマ Marinera mi alma. All Rights Reserved.</p>
+  </div>
+</footer>
 
   <!-- BootstrapのJSと依存ライブラリ -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

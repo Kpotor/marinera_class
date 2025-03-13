@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>新着情報詳細 - マリネラ・ミ・アルマ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <!-- カスタムCSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    body {
+      padding-top: 70px;
+    }
+    .admin-sidebar {
+      background-color: #343a40;
+      color: #fff;
+      height: calc(100vh - 70px);
+      position: fixed;
+      left: 0;
+      top: 70px;
+      padding-top: 20px;
+    }
+    .admin-sidebar .nav-link {
+      color: rgba(255, 255, 255, 0.8);
+      padding: 10px 15px;
+      margin-bottom: 5px;
+    }
+    .admin-sidebar .nav-link:hover, .admin-sidebar .nav-link.active {
+      color: #fff;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    .admin-sidebar .nav-link i {
+      margin-right: 10px;
+    }
+    .admin-content {
+      margin-left: 250px;
+      padding: 20px;
+    }
+    @media (max-width: 768px) {
+      .admin-sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: 0;
+      }
+      .admin-content {
+        margin-left: 0;
+      }
+    }
+    .card-admin {
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .news-content {
+      min-height: 200px;
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <!-- ナビゲーションバー -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="/admin">マリネラ・ミ・アルマ 管理画面</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/" target="_blank">サイトを表示</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('logout') }}">ログアウト</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- サイドバー -->
+      <div class="col-md-2 admin-sidebar d-none d-md-block">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="{{ url_for('admin_dashboard') }}">
+              <i class="fas fa-tachometer-alt"></i> ダッシュボード
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('new_news') }}">
+              <i class="fas fa-plus-circle"></i> 新着情報追加
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- メインコンテンツ -->
+      <main class="col-md-10 admin-content">
+        <!-- フラッシュメッセージ -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <div class="card card-admin">
+          <div class="card-header bg-secondary text-white">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="mb-0">新着情報詳細</h5>
+              <div>
+                <a href="{{ url_for('update_news', news_id=news.id) }}" class="btn btn-sm btn-warning">
+                  <i class="fas fa-edit"></i> 編集
+                </a>
+                <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal">
+                  <i class="fas fa-trash"></i> 削除
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <h2>{{ news.title }}</h2>
+            <p class="text-muted">
+              <i class="fas fa-calendar-alt"></i> {{ news.date_posted.strftime('%Y年%m月%d日 %H:%M') }}
+            </p>
+            <hr>
+            <div class="news-content">
+              {{ news.content|safe }}
+            </div>
+            <div class="mt-4">
+              <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> 一覧に戻る
+              </a>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- 削除確認モーダル -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">削除の確認</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>「{{ news.title }}」を削除してもよろしいですか？この操作は元に戻せません。</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+          <form action="{{ url_for('delete_news', news_id=news.id) }}" method="POST">
+            <input class="btn btn-danger" type="submit" value="削除">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BootstrapのJSと依存ライブラリ -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

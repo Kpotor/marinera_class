@@ -43,6 +43,29 @@ body {
     text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
   }
 
+  /* 新着情報セクション */
+#news {
+  background-color: #fff;
+  padding: 40px 0;
+}
+
+#news h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.news-item {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+/* 新着情報セクションのスクロール設定 */
+.news-scroll {
+  max-height: 300px;  /* 高さはお好みで調整 */
+  overflow-y: auto;   /* 垂直方向にスクロールを有効化 */
+  padding-right: 15px; /* スクロールバーが内容に重ならないように調整（オプション） */
+}
 
   /* 教室紹介セクションのモダンなデザイン */
 .modern-about {

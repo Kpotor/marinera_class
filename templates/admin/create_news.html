@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>新着情報管理 - マリネラ・ミ・アルマ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <!-- カスタムCSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    body {
+      padding-top: 70px;
+    }
+    .admin-sidebar {
+      background-color: #343a40;
+      color: #fff;
+      height: calc(100vh - 70px);
+      position: fixed;
+      left: 0;
+      top: 70px;
+      padding-top: 20px;
+    }
+    .admin-sidebar .nav-link {
+      color: rgba(255, 255, 255, 0.8);
+      padding: 10px 15px;
+      margin-bottom: 5px;
+    }
+    .admin-sidebar .nav-link:hover, .admin-sidebar .nav-link.active {
+      color: #fff;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    .admin-sidebar .nav-link i {
+      margin-right: 10px;
+    }
+    .admin-content {
+      margin-left: 250px;
+      padding: 20px;
+    }
+    @media (max-width: 768px) {
+      .admin-sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: 0;
+      }
+      .admin-content {
+        margin-left: 0;
+      }
+    }
+    .card-admin {
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <!-- ナビゲーションバー -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="/admin">マリネラ・ミ・アルマ 管理画面</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/" target="_blank">サイトを表示</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('logout') }}">ログアウト</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- サイドバー -->
+      <div class="col-md-2 admin-sidebar d-none d-md-block">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('admin_dashboard') }}">
+              <i class="fas fa-tachometer-alt"></i> ダッシュボード
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{{ url_for('new_news') }}">
+              <i class="fas fa-plus-circle"></i> 新着情報追加
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- メインコンテンツ -->
+      <main class="col-md-10 admin-content">
+        <!-- フラッシュメッセージ -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <div class="card card-admin">
+          <div class="card-header bg-secondary text-white">
+            <h5 class="mb-0">{{ legend }}</h5>
+          </div>
+          <div class="card-body">
+            <form method="POST" action="">
+              {{ form.hidden_tag() }}
+              <div class="form-group">
+                {{ form.title.label(class="form-control-label") }}
+                {% if form.title.errors %}
+                  {{ form.title(class="form-control is-invalid") }}
+                  <div class="invalid-feedback">
+                    {% for error in form.title.errors %}
+                      <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                {% else %}
+                  {{ form.title(class="form-control") }}
+                {% endif %}
+              </div>
+              <div class="form-group">
+                {{ form.content.label(class="form-control-label") }}
+                {% if form.content.errors %}
+                  {{ form.content(class="form-control is-invalid", rows=10) }}
+                  <div class="invalid-feedback">
+                    {% for error in form.content.errors %}
+                      <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                {% else %}
+                  {{ form.content(class="form-control", rows=10) }}
+                {% endif %}
+                <small class="form-text text-muted">HTML形式のコンテンツが使用できます。</small>
+              </div>
+              <div class="form-group">
+                {{ form.submit(class="btn btn-primary") }}
+                <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">キャンセル</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- BootstrapのJSと依存ライブラリ -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

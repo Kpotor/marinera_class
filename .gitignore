@@ -1,1 +1,6 @@
 venv/
+.env
+*.db
+__pycache__/
+admininfo.txt
+description/
