@@ -4,39 +4,223 @@
   <meta charset="UTF-8">
   <title>マリネラの魅力 | マリネラ・ミ・アルマ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Bootstrap CDN -->
+  <!-- Bootstrap CSS CDN -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <!-- カスタムCSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <style>
     /* マリネラページ専用のスタイル */
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: #333;
+    }
+    
     .hero-marinera {
-      background: url('{{ url_for('static', filename='images/marinera-hero.jpg') }}') center center no-repeat;
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ url_for("static", filename="images/マリネラトップ.jpg") }}') center center no-repeat;
       background-size: cover;
-      height: 60vh;
-      position: relative;
+      height: 70vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
+      position: relative;
+      margin-top: 56px; /* ナビゲーションバーの高さ分 */
     }
-    .hero-marinera::before {
+    
+    .hero-text {
+      text-align: center;
+      color: #fff;
+      z-index: 2;
+    }
+    
+    .hero-text h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+      margin-bottom: 1.5rem;
+    }
+    
+    .hero-text h2 {
+      font-size: 2.5rem;
+      font-weight: 300;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    }
+    
+    .section-title {
+      position: relative;
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+    
+    .section-title::after {
       content: "";
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(to right, #FF5252, #FC7676);
+      border-radius: 2px;
     }
-    .hero-marinera h1 {
-      position: relative;
-      z-index: 1;
-      font-size: 3rem;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-    }
+    
     .content-section {
-      padding: 60px 0;
+      padding: 5rem 0;
+    }
+    
+    .content-section:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+    
+    .feature-card {
+      border: none;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 100%;
+      margin-bottom: 30px;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+    
+    .feature-card .card-body {
+      padding: 2rem;
+    }
+    
+    .feature-card .card-title {
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+    
+    .highlight-box {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 3rem;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      margin-bottom: 2rem;
+    }
+    
+    .quote-box {
+      position: relative;
+      padding: 2rem;
+      background-color: #fff;
+      border-left: 5px solid #FF5252;
+      border-radius: 5px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      margin: 3rem 0;
+    }
+    
+    .quote-box::before {
+      content: '"';
+      position: absolute;
+      top: -30px;
+      left: 20px;
+      font-size: 5rem;
+      color: #FF5252;
+      font-family: Georgia, serif;
+      opacity: 0.3;
+    }
+    
+    .action-section {
+      background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('{{ url_for("static", filename="images/マリネラ1.jpg") }}') center center no-repeat;
+      background-size: cover;
+      padding: 5rem 0;
+      color: #fff;
+      text-align: center;
+    }
+    
+    .action-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .btn-marinera {
+      background-color: #FF5252;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      border-radius: 50px;
+      box-shadow: 0 5px 15px rgba(255, 82, 82, 0.3);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-marinera:hover {
+      background-color: #FF3333;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 82, 82, 0.4);
+      color: white;
+    }
+    
+    .image-feature {
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      max-width: 100%;
+      height: auto;
+    }
+    
+    .image-feature:hover {
+      transform: scale(1.02);
+    }
+    
+    .icon-feature {
+      font-size: 3rem;
+      color: #FF5252;
+      margin-bottom: 1.5rem;
+    }
+    
+    .highlight-text {
+      color: #FF5252;
+      font-weight: 700;
+    }
+    
+    .floating-card {
+      background-color: white;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      margin-top: -100px;
+      position: relative;
+      z-index: 10;
+    }
+    
+    .school-info-box {
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      margin-top: 2rem;
+      border-left: 4px solid #FF5252;
+    }
+    
+    .tournament-box {
+      background-color: #fff8f8;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-top: 1rem;
+      border: 1px solid #ffdddd;
+      box-shadow: 0 3px 10px rgba(255, 82, 82, 0.1);
+    }
+    
+    @media (max-width: 768px) {
+      .hero-text h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero-text h2 {
+        font-size: 1.8rem;
+      }
+      
+      .floating-card {
+        margin-top: -50px;
+      }
     }
   </style>
 </head>
@@ -45,7 +229,6 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
     <!-- ロゴ画像を配置 -->
     <a class="navbar-brand" href="/">
-      <!-- 高さや余白は必要に応じて調整してください -->
       <img src="{{ url_for('static', filename='images/教室ロゴ.png') }}"
            alt="マリネラ・ミ・アルマ ロゴ"
            style="height: 40px; margin-right: 10px;">
@@ -57,146 +240,284 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#about">教室紹介 <span class="sr-only">(現位置)</span></a>
+        <li class="nav-item">
+          <a class="nav-link" href="/#about">教室紹介</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#instructors">講師紹介</a>
+          <a class="nav-link" href="/#instructors">講師紹介</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#classes">クラス</a>
+          <a class="nav-link" href="/#classes">クラス</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#class-locations">場所</a>
+          <a class="nav-link" href="/#class-locations">場所</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#schedule">スケジュール</a>
+          <a class="nav-link" href="/#schedule">スケジュール</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#contact">お問い合わせ</a>
+          <a class="nav-link" href="/#contact">お問い合わせ</a>
         </li>
       </ul>
     </div>
   </nav>
 
-<!-- ヒーローセクション -->
-<header class="hero-marinera position-relative" style="height: 60vh;">
-    <!-- 背景画像要素（絶対配置） -->
-    <img src="{{ url_for('static', filename='images/マリネラトップ.jpg') }}" alt="マリネラヒーロー" 
-         class="position-absolute w-100 h-100" 
-         style="object-fit: cover; top:0; left:0; z-index: 1;">
-    
-    <!-- オーバーレイ -->
-    <div class="hero-overlay position-absolute w-100 h-100" 
-         style="top:0; left:0; background: rgba(0,0,0,0.5); z-index: 2;"></div>
-    
-    <!-- ヒーローテキスト -->
-    <div class="container text-center position-relative" style="z-index: 3; display: flex; align-items: center; justify-content: center; height: 100%;">
-      <h1 class="text-white" style="font-size: 3rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
-        マリネラって何？
-      </h1>
+  <!-- ヒーローセクション -->
+  <header class="hero-marinera">
+    <div class="container hero-text">
+      <h1>マリネラ（marinera）って何？</h1>
+      <h2>自由と笑顔のダンス</h2>
     </div>
   </header>
-  
 
   <!-- メインコンテンツ -->
   <main>
-    <!-- マリネラって何？ -->
-    <section class="content-section">
-      <div class="container">
-        <h2 class="mb-4">マリネラって何？</h2>
-        <p class="lead">マリネラ（Marinera）は、ペルーの国民的伝統舞踊であり、自由と笑顔があふれるダンスです。</p>
-        <div class="row">
-          <div class="col-md-6">
-            <img src="{{ url_for('static', filename='images/マリネラ1.jpg') }}" alt="マリネラダンス" class="img-fluid rounded shadow-lg">
-          </div>
-          <div class="col-md-6">
-            <p>ペルーでは学校で習うほどポピュラーなダンスで、『愛』を表現するため、男女のペアで踊るのが基本です。ペルー各地に「マリネラ」と呼ばれる8分の6拍子の踊りがありますが、その中でも最も有名で盛んなのが、ペルー北部の「マリネラ ノルテーニャ」です。</p>
+    <!-- 導入部分（フローティングカード） -->
+    <section class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="floating-card text-center">
+            <h2 class="mb-4">ペルーの国民的伝統舞踊『マリネラ』</h2>
+            <p class="lead">ペルーの国民的伝統舞踊『マリネラ』は、現地では学校で習うほどポピュラーなダンス。<br>
+              <span class="highlight-text">『愛』</span>を表現するダンスなので、男女のペアが基本です。
+            </p>
+            <p class="mt-3">
+              ペルー各地に『マリネラ』と呼ばれる8分の6拍子の踊りがありますが、<br>
+              なかでも最も有名で盛んなのが、ペルー北部のマリネラ
+              <span class="highlight-text">『マリネラ ノルテーニャ』</span>です。
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ペルーの国民舞踊としてのマリネラ -->
-    <section class="content-section bg-light">
-      <div class="container">
-        <h2 class="mb-4">ペルーの国民舞踊「マリネラ」</h2>
-        <p>Wikipediaによると、マリネラ(Marinera)とは、ペルー共和国を代表する伝統舞踊・競技ペアダンス及びその音楽のことです。ブラジルのサンバ、アルゼンチンのタンゴと共に、南米三大ダンスの一つに数えられ、ペルーの無形文化遺産にも指定されています。踊り手は白いハンカチを右手に持ち、6/8拍子のリズムで情熱的に踊ります。</p>
-      </div>
-    </section>
-
-    <!-- 多彩なスタイル -->
+    <!-- マリネラの定義 -->
     <section class="content-section">
       <div class="container">
-        <h2 class="mb-4">多彩なスタイル</h2>
-        <p>マリネラには、主に以下の3種類のスタイルがあります。</p>
-        <ul>
-          <li><strong>ノルテーニャ：</strong>ペルー北部海岸地方、特にトルヒーヨ市を中心としたスタイル。最も盛んで、競技ダンスとしても発展。</li>
-          <li><strong>リメーニャ：</strong>首都リマのスタイル。</li>
-          <li><strong>セラーナ：</strong>アンデス山岳地方（プーノ、アヤクーチョ、アレキパなど）の様々なスタイルの総称。</li>
-        </ul>
-        <p>通常、「マリネラ」と呼ばれる場合は、最も盛んな「ノルテーニャ」を指します。</p>
+        <h2 class="section-title">ペルーの国民舞踊マリネラとは</h2>
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <div class="highlight-box">
+              <p><strong>マリネラ</strong>(Marinera)とは、<a href="https://ja.wikipedia.org/wiki/%E3%83%9A%E3%83%AB%E3%83%BC">ペルー共和国</a>を代表する伝統舞踊・競技ペアダンス、及びその音楽のことである。 ブラジルのサンバ、アルゼンチンのタンゴと共に、南米3大ダンスの1つに挙げられ、ペルー共和国の無形文化遺産となっている。 男女ペアのダンスで、男女とも白いハンカチを右手に持ち、6/8拍子のリズムで踊るのが大きな特徴である。</p>
+              <p>マリネラは主に以下の3種類に大別できる。</p>
+              <ul>
+                <li><a href="https://ja.wikipedia.org/wiki/%E3%83%88%E3%83%AB%E3%83%92%E3%83%BC%E3%83%AA%E3%83%A7_(%E3%83%9A%E3%83%AB%E3%83%BC)">トルヒーヨ市</a>を中心とした、ペルー北部海岸地方のスタイルである<strong>「ノルテーニャ」</strong></li>
+                <li>首都である<a href="https://ja.wikipedia.org/wiki/%E3%83%AA%E3%83%9E">リマ</a>のスタイルである<strong>「リメーニャ」</strong></li>
+                <li>アンデス山岳地方（プーノ・アヤクーチョ・アレキパ等）のスタイルである<strong>「セラーナ」</strong><br>
+                  (※セラーナのみ特定のスタイル名ではなく、アンデス地方における様々なスタイルの総称である)</li>
+              </ul>
+              <p>これらのうち最も盛んなものはペルー北部スタイルの<strong>ノルテーニャ</strong>である。</p>
+              <p>このマリネラ・ノルテーニャは競技ペアダンスとして発展して、発祥の地とされているペルー北部沿岸に位置する都市トルヒーヨ市では毎年１月の末に世界大会が行われている。 上記のようにマリネラは地域によって種類があるが、単に「マリネラ」と呼ぶ場合、このマリネラ・ノルテーニャのことを指す場合が一般的である。</p>
+              <p> Wikipediaより引用</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mt-4 bg-light rounded p-4">
+              <h4 class="text-center mb-4">マリネラの3種類</h4>
+              
+              <div class="row justify-content-center mb-3">
+                <!-- ノルテーニャ - 特別強調 -->
+                <div class="col-md-4 col-sm-4 mb-3">
+                  <div class="card h-100 text-center p-3 border-primary shadow" style="border-width: 3px;">
+                    <div class="ribbon-wrapper position-absolute" style="top: -5px; right: -5px;">
+                      <div class="ribbon bg-primary text-white px-2 py-1" style="font-size: 0.7rem;">最も一般的</div>
+                    </div>
+                    <i class="fas fa-map-marker-alt icon-feature mb-2" style="font-size: 2rem; color: #FF5252;"></i>
+                    <h5><strong>ノルテーニャ</strong></h5>
+                    <p class="mb-1">北部海岸地方</p>
+                    <p class="small text-primary"><i class="fas fa-star mr-1"></i>競技ダンスとして発展</p>
+                  </div>
+                </div>
+                
+                <!-- リメーニャ -->
+                <div class="col-md-4 col-sm-4 mb-3">
+                  <div class="card h-100 text-center p-3">
+                    <i class="fas fa-city icon-feature mb-2" style="font-size: 2rem; color: #FF5252;"></i>
+                    <h5><strong>リメーニャ</strong></h5>
+                    <p class="mb-0">首都リマ地域</p>
+                  </div>
+                </div>
+                
+                <!-- セラーナ -->
+                <div class="col-md-4 col-sm-4 mb-3">
+                  <div class="card h-100 text-center p-3">
+                    <i class="fas fa-mountain icon-feature mb-2" style="font-size: 2rem; color: #FF5252;"></i>
+                    <h5><strong>セラーナ</strong></h5>
+                    <p class="mb-0">アンデス山岳地方</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 説明テキスト -->
+              <div class="text-center mt-2">
+                <div class="alert alert-info d-inline-block mb-0">
+                  <i class="fas fa-info-circle mr-2"></i>一般的に「マリネラ」と言えば、<strong>ノルテーニャ</strong>を指します
+                </div>
+              </div>
+              <!-- コンクール情報を追加 -->
+              <div class="tournament-box mt-4">
+                <h4 class="mb-3"><i class="fas fa-trophy mr-2" style="color: #FF5252;"></i>国際コンクール</h4>
+                <p>毎年1月にペルー北部のトルヒーヨという街で、最も権威のある国際コンクールが開催されます。</p>
+                <p class="mb-0">このコンクールのチャンピオンが名実ともに<strong>『マリネラのチャンピオン』</strong>と認定されます。</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
-
-    <!-- 国際コンクールと競技性 -->
-    <section class="content-section bg-light">
+    
+    <!-- 教室での学び情報を追加（セクション外に配置） -->
+    <section class="bg-light py-4">
       <div class="container">
-        <h2 class="mb-4">競技としてのマリネラ</h2>
-        <p>ペルー北部のトルヒーヨ市では、毎年1月末に最も権威のある国際コンクールが開催され、このコンクールのチャンピオンが「マリネラのチャンピオン」として認定されます。女性は片手にスカートの端とハンカチを持ち裸足で、男性はつばの広い帽子とハンカチを持ち、常に笑顔で踊るのが特徴です。</p>
+        <div class="row">
+          <div class="col-12">
+            <div class="school-info-box bg-white">
+              <h3 class="text-center mb-4"><i class="fas fa-graduation-cap mr-2" style="color: #FF5252;"></i>当教室で学べるマリネラ</h3>
+              <p>当教室でも、ノルテーニャを基本に学んでいただきますが、トンデーロ、ワイラス、バリーチャ、ウィティティ、リャメラーダ、フェステホなど、ペルー各地の踊りも体験することができます。</p>
+              <div class="alert alert-info">
+                <i class="fas fa-info-circle mr-2"></i>（実はこれ、日本ではかなり珍しいことなんです）
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- 自由な表現とアドリブの魅力 -->
+    <!-- マリネラの特徴 -->
     <section class="content-section">
       <div class="container">
-        <h2 class="mb-4">自由な表現とアドリブ</h2>
-        <p>マリネラは、あらかじめ決められた動きだけでなく、リードする女性がその場で動きを決めるアドリブ要素が豊富です。踊るたびにその瞬間だけの表現が生まれ、一度踊れば同じ踊りは二度と生まれません。初心者の方でも、踊りながら「自分はどう動きたいか」や「パートナーとどのようにコミュニケーションするか」を学べるのが魅力です。</p>
+        <h2 class="section-title">マリネラの魅力</h2>
+        <div class="row">
+          <div class="col-lg-4 mb-4">
+            <div class="feature-card">
+              <div class="card-body">
+                <i class="fas fa-smile icon-feature"></i>
+                <h3 class="card-title">笑顔と情熱</h3>
+                <p>女性は片手にスカートの端、片手にハンカチを持ち、裸足。男性は片手につばの広い帽子、片手にハンカチを持ちます。</p>
+                <p>そして、常に<strong>にっこりと笑って</strong>踊るのです。（陽気なペルーの人にとって『愛』とは楽しく、暖かいものなのでしょう）</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-4">
+            <div class="feature-card">
+              <div class="card-body">
+                <i class="fas fa-random icon-feature"></i>
+                <h3 class="card-title">自由な踊り</h3>
+                <p>ポイントで決められた動きをする以外は、リードする女性側がその場で動きを決めます。そう、ほとんどの動きが<strong>「アドリブ」</strong>なのです。</p>
+                <p>マリネラを踊ったことがある人となら、「はじめまして」で踊れてしまいます（笑）</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-4">
+            <div class="feature-card">
+              <div class="card-body">
+                <i class="fas fa-comments icon-feature"></i>
+                <h3 class="card-title">対話する踊り</h3>
+                <p>手に持ったハンカチや目線、仕草でペアの男性とコミュニケーションを取り、男性はそれに合わせて動きを決め踊ります。</p>
+                <p>現地のコンクールでは当日、その場で曲が決まります。その瞬間、その時にしか踊れないダンス表現を大切にしているのですね。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="quote-box mt-5">
+          <p class="lead mb-0">「決められた動きを練習して踊る」という、世界各地にあるダンスとは一線を画すのです。</p>
+        </div>
       </div>
     </section>
 
-    <!-- 個性豊かな表現 -->
+    <!-- 安心セクション -->
     <section class="content-section bg-light">
       <div class="container">
-        <h2 class="mb-4">個性豊かな表現</h2>
-        <p>マリネラは基本的にペアダンスですが、シングルやグループでのパフォーマンスも行われ、子供からシニアまで各世代がそれぞれの『愛』を表現します。あなたにしかできない、唯一無二のマリネラが必ずあります。</p>
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <h2 class="mb-4">「そんなの踊れるの？」と、不安になりますよね。</h2>
+            <h3 class="text-success mb-4">でも、大丈夫！</h3>
+            <p>踊っているうちに、「自分はどう動きたいのか、相手とどう合せたらいいのか」といった感覚も掴めてきますし、現地で沢山壁にぶつかって学んだ日本人講師が、実体験を踏まえ、しっかりとアドバイスさせていただきます！</p>
+            <div class="alert alert-success mt-4">
+              <p class="lead mb-0">「決められた動きがない」ということは言うなれば<br><strong>「どんな動きでもすばらしい」</strong>ということ。</p>
+            </div>
+            <p class="mt-4">お子さんの自立や、大人の方も自分軸を確立させることに、とても効果的です。</p>
+          </div>
+          <div class="col-md-6">
+            <img src="{{ url_for('static', filename='images/マリネラ1.jpg') }}" alt="マリネラ指導" class="image-feature">
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- お問い合わせボタン -->
-    <section class="content-section text-center">
+    <!-- マリネラの多様性 -->
+    <section class="content-section">
       <div class="container">
-        <a href="#contact" class="btn btn-primary btn-lg">体験レッスンのお問い合わせはこちら</a>
+        <h2 class="section-title">あなたらしく踊れるマリネラ</h2>
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <div class="card feature-card">
+              <div class="card-body">
+                <h3 class="card-title"><i class="fas fa-user mr-2"></i>シングル</h3>
+                <p>基本はペアの踊りですが、日本のコンクールではシングル部門が開かれることも多いので、一人で踊るマリネラにも注目が集まっています。</p>
+                <p>「初めからペアのダンスは緊張する……」という方も、安心して始めることができますよ。（実際講師も、国内コンクールのシングル部門で賞をいただいたことがあります）</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card feature-card">
+              <div class="card-body">
+                <h3 class="card-title"><i class="fas fa-users mr-2"></i>グループ</h3>
+                <p>女性だけ、男性だけ、男女混合のグループで踊ることもあるので、仲の良いお友達同士でグループを組んで踊る、なんていうのも楽しいですね。</p>
+                <p>こちらは大人数ならではの迫力とフォーメーションの美しさが見ものです。</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card feature-card">
+              <div class="card-body">
+                <h3 class="card-title"><i class="fas fa-heart mr-2"></i>すべての世代</h3>
+                <p>子供、若者、大人、シニアと、各世代で表現される<strong>『愛』</strong>は様々。楽しくにぎやか、華々しく情熱的、しっとり、ゆったり。</p>
+                <p>あなたにしか表現できない<strong>『マリネラ』</strong>が、きっとあります。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="action-section">
+      <div class="container">
+        <h2>あなたも笑顔と自由のマリネラを始めてみませんか？</h2>
+        <p class="lead mb-5">当教室では初心者の方も安心して学べるレッスンを提供しています</p>
+        <a href="/#contact" class="btn btn-marinera btn-lg">体験レッスンのお問い合わせはこちら</a>
       </div>
     </section>
   </main>
 
-<!-- フッター -->
-<footer class="py-4 bg-secondary text-white text-center">
-  <div class="container">
-    <!-- SNSリンクを追加（直接画像を使用） -->
-    <div class="social-links mb-3">
-      <a href="https://www.youtube.com/@Marineramialma" target="_blank" class="mx-2">
-        <img src="{{ url_for('static', filename='images/yt_icon_rgb.png') }}" alt="YouTube" style="width:64px">
-      </a>
-      <a href="https://www.instagram.com/marinerachifumifukuda//" target="_blank" class="mx-2">
-        <img src="{{ url_for('static', filename='images/Instagram_Glyph_Gradient.png') }}" alt="Instagram" style="width:64px">
-      </a>
-      <a href="https://twitter.com/marineramialma" target="_blank" class="mx-2">
-        <img src="{{ url_for('static', filename='images/logo-black.png') }}" alt="X" style="width:64px">
-      </a>
-      <a href="https://www.tiktok.com/@marineramialma?lang=ja-JP" target="_blank" class="mx-2">
-        <img src="{{ url_for('static', filename='images/TikTok_Icon_Black_Circle.png') }}" alt="X" style="width:64px">
-      </a>
+  <!-- フッター -->
+  <footer class="py-4 bg-secondary text-white text-center">
+    <div class="container">
+      <!-- SNSリンクを追加（直接画像を使用） -->
+      <div class="social-links mb-3">
+        <a href="https://www.youtube.com/@Marineramialma" target="_blank" class="mx-2">
+          <img src="{{ url_for('static', filename='images/yt_icon_rgb.png') }}" alt="YouTube" style="width:64px">
+        </a>
+        <a href="https://www.instagram.com/marinerachifumifukuda//" target="_blank" class="mx-2">
+          <img src="{{ url_for('static', filename='images/Instagram_Glyph_Gradient.png') }}" alt="Instagram" style="width:64px">
+        </a>
+        <a href="https://twitter.com/marineramialma" target="_blank" class="mx-2">
+          <img src="{{ url_for('static', filename='images/logo-black.png') }}" alt="X" style="width:64px">
+        </a>
+        <a href="https://www.tiktok.com/@marineramialma?lang=ja-JP" target="_blank" class="mx-2">
+          <img src="{{ url_for('static', filename='images/TikTok_Icon_Black_Circle.png') }}" alt="X" style="width:64px">
+        </a>
+      </div>
+      
+      <!-- ここに同じロゴを配置 -->
+      <img src="{{ url_for('static', filename='images/教室ロゴ.png') }}"
+           alt="マリネラ・ミ・アルマ ロゴ"
+           style="height: 300px; margin-bottom: 10px;">
+      <p class="mb-0">&copy; 2025 マリネラ・ミ・アルマ Marinera mi alma. All Rights Reserved.</p>
     </div>
-    
-    <!-- ここに同じロゴを配置 -->
-    <img src="{{ url_for('static', filename='images/教室ロゴ.png') }}"
-         alt="マリネラ・ミ・アルマ ロゴ"
-         style="height: 300px; margin-bottom: 10px;">
-    <p class="mb-0">&copy; 2025 マリネラ・ミ・アルマ Marinera mi alma. All Rights Reserved.</p>
-  </div>
-</footer>
+  </footer>
 
   <!-- BootstrapのJSと依存ライブラリ -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

@@ -216,7 +216,7 @@
               {% for item in news[:5] %}
                 <div class="list-group-item">
                   <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">{{ item.title }}</h5>
+                    <h5 class="mb-1"><b>{{ item.title }}</b></h5>
                     <small class="text-muted">{{ item.date_posted.strftime('%Y年%m月%d日') }}</small>
                   </div>
                   <div class="mb-1">{{ item.content|safe }}</div>

@@ -38,6 +38,18 @@
     .admin-content {
       margin-left: 250px;
       padding: 20px;
+      width: calc(100% - 250px); /* サイドバーの幅を考慮したコンテンツ幅を設定 */
+      float: right; /* 右寄せにしてサイドバーとの重なりを防ぐ */
+    }
+    /* サイドバーの幅を明示的に指定 */
+    .admin-sidebar {
+      width: 250px;
+    }
+    
+    /* 新着情報管理の見出しとボタンのスタイルを明示的に指定 */
+    .admin-content h2.mb-4,
+    .admin-content .mb-4 {
+      margin-left: 0 !important; /* 左マージンをリセット */
     }
     @media (max-width: 768px) {
       .admin-sidebar {
