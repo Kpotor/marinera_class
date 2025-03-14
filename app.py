@@ -75,6 +75,11 @@ def instructors():
 def marinera():
     return render_template('marinera.html')
 
+# 新しい料金案内ページのルート
+@app.route('/price')
+def price():
+    return render_template('price.html')
+
 # 新しいルート - ログイン関連
 @app.route('/login', methods=['GET', 'POST'])
 def login():

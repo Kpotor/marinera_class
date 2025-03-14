@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>料金案内 | マリネラ・ミ・アルマ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- カスタムCSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    /* 料金ページ専用のスタイル */
+    .price-hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ url_for("static", filename="images/hero.jpg") }}') center center no-repeat;
+      background-size: cover;
+      height: 50vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-top: 56px; /* ナビゲーションバーの高さ分 */
+    }
+    
+    .price-card {
+      border: none;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 100%;
+      margin-bottom: 30px;
+    }
+    
+    .price-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+    
+    .price-card .card-header {
+      background-color: #FF5252;
+      color: white;
+      font-weight: bold;
+      padding: 1.5rem;
+      border-bottom: none;
+    }
+    
+    .price-card .card-body {
+      padding: 2rem;
+    }
+    
+    .price-option {
+      border-bottom: 1px solid #eee;
+      padding: 1rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .price-option:last-child {
+      border-bottom: none;
+    }
+    
+    .price-notes {
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      padding: 2rem;
+      margin-top: 2rem;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    }
+    
+    .family-discount {
+      background-color: #fff8f8;
+      border-left: 4px solid #FF5252;
+      padding: 1.5rem;
+      border-radius: 0 10px 10px 0;
+      margin: 2rem 0;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    }
+    
+    .new-badge {
+      background-color: #FF5252;
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      display: inline-block;
+      margin-left: 10px;
+    }
+    
+    .trial-section {
+      background-color: #f0f8ff;
+      border-radius: 10px;
+      padding: 2.5rem;
+      margin: 2rem 0;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+    
+    .trial-price {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #FF5252;
+      margin: 1rem 0;
+    }
+    
+    .section-title {
+      position: relative;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+    }
+    
+    .section-title::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background-color: #FF5252;
+      border-radius: 3px;
+    }
+    
+    .section-title.text-center::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    @media (max-width: 768px) {
+      .price-option {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .price-option span:last-child {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ナビゲーションバー -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+    <!-- ロゴ画像を配置 -->
+    <a class="navbar-brand" href="/">
+      <img src="{{ url_for('static', filename='images/教室ロゴ.png') }}"
+           alt="マリネラ・ミ・アルマ ロゴ"
+           style="height: 40px; margin-right: 10px;">
+      マリネラ・ミ・アルマ Marinera mi alma
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/#about">教室紹介</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/#instructors">講師紹介</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/#classes">クラス</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/#class-locations">場所</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/#schedule">スケジュール</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/price">料金案内 <span class="sr-only">(現位置)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/#contact">お問い合わせ</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ヒーローセクション -->
+  <header class="price-hero">
+    <div class="container text-center text-white">
+      <h1 class="display-4">料金案内</h1>
+      <p class="lead">Precio - クラス別の受講料金</p>
+    </div>
+  </header>
+
+  <!-- メインコンテンツ -->
+  <main>
+    <section class="py-5">
+      <div class="container">
+        <h2 class="section-title text-center">基本料金</h2>
+        <p class="text-center"> マリネラ・ワイラス・トンデーロクラス共通のお値段です</p>
+        <div class="row">
+          <!-- 大人料金カード -->
+          <div class="col-lg-4 mb-4">
+            <div class="price-card">
+              <div class="card-header text-center">
+                <h3 class="m-0">大人料金</h3>
+                <div class="small">(高校生以上)</div>
+              </div>
+              <div class="card-body">
+                <div class="price-option">
+                  <span>1回</span>
+                  <span class="font-weight-bold">3,000円</span>
+                </div>
+                <div class="price-option">
+                  <span>4回回数券</span>
+                  <span class="font-weight-bold">9,600円 (@2,400円)</span>
+                </div>
+                <div class="price-option">
+                  <span>月謝 (月4回)</span>
+                  <span class="font-weight-bold">8,800円 (@2,200円)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
+          <!-- 中学生料金カード -->
+          <div class="col-lg-4 mb-4">
+            <div class="price-card">
+              <div class="card-header text-center">
+                <h3 class="m-0">中学生料金</h3>
+              </div>
+              <div class="card-body">
+                <div class="price-option">
+                  <span>1回</span>
+                  <span class="font-weight-bold">2,500円</span>
+                </div>
+                <div class="price-option">
+                  <span>4回回数券</span>
+                  <span class="font-weight-bold">8,000円 (@2,000円)</span>
+                </div>
+                <div class="price-option">
+                  <span>月謝 (月4回)</span>
+                  <span class="font-weight-bold">7,200円 (@1,800円)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 小学生料金カード -->
+          <div class="col-lg-4 mb-4">
+            <div class="price-card">
+              <div class="card-header text-center">
+                <h3 class="m-0">小学生料金</h3>
+              </div>
+              <div class="card-body">
+                <div class="price-option">
+                  <span>1回</span>
+                  <span class="font-weight-bold">2,000円</span>
+                </div>
+                <div class="price-option">
+                  <span>4回回数券</span>
+                  <span class="font-weight-bold">6,400円 (@1,600円)</span>
+                </div>
+                <div class="price-option">
+                  <span>月謝 (月4回)</span>
+                  <span class="font-weight-bold">5,600円 (@1,400円)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ストレッチ＆エクササイズクラス -->
+    <section class="py-5 bg-light">
+      <div class="container">
+        <h2 class="section-title text-center">
+          ストレッチ＆エクササイズクラス
+        </h2>
+
+        <div class="row">
+          <div class="col-lg-6 col-md-8 mx-auto">
+            <div class="price-card">
+              <div class="card-header text-center">
+                <h3 class="m-0">大人料金</h3>
+                <div class="small">(高校生以上)</div>
+              </div>
+              <div class="card-body">
+                <div class="price-option">
+                  <span>1回</span>
+                  <span class="font-weight-bold">2,000円</span>
+                </div>
+                <div class="price-option">
+                  <span>4回回数券</span>
+                  <span class="font-weight-bold">6,000円 (@1,500円)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 家族割引 -->
+    <section class="py-5">
+      <div class="container">
+        <div class="family-discount">
+          <div class="row align-items-center">
+            <div class="col-md-2 text-center mb-3 mb-md-0">
+              <i class="fas fa-people-group fa-3x" style="color: #FF5252;"></i>
+            </div>
+            <div class="col-md-10">
+              <h3>お得な家族割引 <span class="new-badge">NEW</span></h3>
+              <p class="lead mb-2">2人目から500円引き（中学生以上のチケットのみ）</p>
+              <p class="mb-0">ご家族で二人以上参加される場合、二人目から4回チケットまたは月謝の1チケットにつき500円割引いたします。三人目以降も同様です。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 体験レッスン -->
+    <section class="py-5 bg-light">
+      <div class="container">
+        <div class="trial-section">
+          <h3>初回体験チケット</h3>
+          <p class="lead">初回限定でおトクに体験できます</p>
+          <div class="trial-price">2,000円</div>
+          <p>どのクラスでも自由に受けられます。<br>気になるクラスがあれば、ぜひお気軽にお試しください。</p>
+          <a href="/#contact" class="btn btn-lg btn-danger mt-3">体験レッスンのお申し込み</a>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 注意事項 -->
+    <section class="py-5">
+      <div class="container">
+        <h2 class="section-title">ご利用上の注意</h2>
+        <div class="price-notes">
+          <div class="row">
+            <div class="col-md-6 mb-4 mb-md-0">
+              <div>
+                <h5><i class="fas fa-circle-info me-2" style="color: #FF5252;"></i> 4回回数券について</h5>
+                <p>4回回数券は、初回使用日から2か月間有効です。<br>
+                ただし、当方の都合によりお休みになった場合は繰越せます。</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div>
+                <h5><i class="fas fa-circle-info me-2" style="color: #FF5252;"></i> 月謝について</h5>
+                <p>月謝は月4回のレッスンが含まれます。<br>
+                月謝の支払い方法は、前月末までに翌月分をお支払いください。<br>
+                レッスンの振替可。</p>
+              </div>
+            </div>
+          </div>
+          <div class="alert alert-secondary text-center mt-4 mb-0">
+            <strong>※すべて現金でのお支払いになります。</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- フッター -->
+  <footer class="py-4 bg-secondary text-white text-center">
+    <div class="container">
+      <!-- SNSリンクを追加（直接画像を使用） -->
+      <div class="social-links mb-3">
+        <a href="https://www.youtube.com/@Marineramialma" target="_blank" class="mx-2">
+          <img src="{{ url_for('static', filename='images/yt_icon_rgb.png') }}" alt="YouTube" style="width:64px">
+        </a>
+        <a href="https://www.instagram.com/marinerachifumifukuda//" target="_blank" class="mx-2">
+          <img src="{{ url_for('static', filename='images/Instagram_Glyph_Gradient.png') }}" alt="Instagram" style="width:64px">
+        </a>
+        <a href="https://twitter.com/marineramialma" target="_blank" class="mx-2">
+          <img src="{{ url_for('static', filename='images/logo-black.png') }}" alt="X" style="width:64px">
+        </a>
+        <a href="https://www.tiktok.com/@marineramialma?lang=ja-JP" target="_blank" class="mx-2">
+          <img src="{{ url_for('static', filename='images/TikTok_Icon_Black_Circle.png') }}" alt="X" style="width:64px">
+        </a>
+      </div>
+      
+      <!-- ここに同じロゴを配置 -->
+      <img src="{{ url_for('static', filename='images/教室ロゴ.png') }}"
+           alt="マリネラ・ミ・アルマ ロゴ"
+           style="height: 300px; margin-bottom: 10px;">
+      <p class="mb-0">&copy; 2025 マリネラ・ミ・アルマ Marinera mi alma. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- BootstrapのJSと依存ライブラリ -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

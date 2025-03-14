@@ -17,11 +17,9 @@
   </style>
 </head>
 <body>
-  <!-- ナビゲーションバー -->
   <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
     <!-- ロゴ画像を配置 -->
     <a class="navbar-brand" href="#">
-      <!-- 高さや余白は必要に応じて調整してください -->
       <img src="{{ url_for('static', filename='images/教室ロゴ.png') }}"
            alt="マリネラ・ミ・アルマ ロゴ"
            style="height: 40px; margin-right: 10px;">
@@ -48,6 +46,10 @@
         <li class="nav-item">
           <a class="nav-link" href="#schedule">スケジュール</a>
         </li>
+        <!-- 料金案内へのリンクを追加 -->
+        <li class="nav-item">
+          <a class="nav-link" href="/price">料金案内</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="#contact">お問い合わせ</a>
         </li>
@@ -55,13 +57,209 @@
     </div>
   </nav>
 
-  <!-- ヒーローセクション -->
-  <header class="hero-section text-center text-white">
-    <div class="container">
-      <h1 class="display-4">マリネラダンス教室</h1>
-      <p class="lead">愛を語りましょう</p>
+<!-- ヒーローセクション -->
+<header class="hero-section text-center text-white">
+  <!-- Google Fontsの読み込み部分 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700;900&family=M+PLUS+Rounded+1c:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- カスタムスタイル -->
+  <style>
+    /* ヒーローセクションのスタイル */
+    .hero-section {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 500px;
+      /* ここに背景画像を追加 */
+      background-image: url("{{ url_for('static', filename='images/hero.jpg') }}");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      /* 背景画像のフェードイン（オプション） */
+      animation: fadeIn 1s ease forwards;
+    }
+    
+    .hero-content {
+      padding: 20px;
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      max-width: 800px;
+      width: 90%;
+      margin: 20px;
+      /* コンテンツ全体に遅延フェードインを適用 */
+      opacity: 0;
+      animation: fadeIn 1s ease 1s forwards;
+    }
+    
+    /* メインタイトル */
+    .hero-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 3.8rem;
+      font-weight: 900;
+      margin-bottom: 0.7rem;
+      text-shadow: 1px 2px 3px rgba(0,0,0,0.3);
+      letter-spacing: 2px;
+      transform: translateY(20px);
+      opacity: 0;
+      /* アニメーション開始時間を遅延 */
+      animation: fadeInUp 1s ease 2s forwards;
+      color: #222;
+    }
+    
+    /* ロゴ部分 */
+    .logo-container {
+      margin: 1rem auto 1.5rem;
+      transform: translateY(20px);
+      opacity: 0;
+      /* アニメーション開始時間を遅延 */
+      animation: fadeInUp 1s ease 3s forwards;
+      max-width: 95%;
+      width: 600px; /* より大きな最大幅に設定 */
+    }
+    
+    .logo-container img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    
+    /* 説明文 */
+    .hero-description {
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 500;
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+      transform: translateY(20px);
+      opacity: 0;
+      /* アニメーション開始時間を遅延 */
+      animation: fadeInUp 1s ease 3.5s forwards;
+      padding: 10px 20px;
+      border-top: 1px solid rgba(0, 0, 0, 0.2);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      display: inline-block;
+      color: #333;
+    }
+        
+    /* 装飾要素 */
+    .hero-decoration {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+      z-index: 0;
+    }
+    
+    .hero-decoration.top-right {
+      width: 400px;
+      height: 400px;
+      top: -200px;
+      right: -200px;
+    }
+    
+    .hero-decoration.bottom-left {
+      width: 300px;
+      height: 300px;
+      bottom: -150px;
+      left: -150px;
+    }
+    
+    /* 波線装飾 */
+    .wave-divider {
+      height: 3px;
+      width: 120px;
+      margin: 0 auto 20px;
+      background: url("data:image/svg+xml,%3Csvg width='120' height='3' viewBox='0 0 120 3' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 1.5C10 1.5 10 3 20 3C30 3 30 0 40 0C50 0 50 3 60 3C70 3 70 0 80 0C90 0 90 3 100 3C110 3 110 0 120 0' stroke='%23FF5252' stroke-width='2'/%3E%3C/svg%3E") repeat-x;
+      opacity: 0;
+      animation: fadeIn 1s ease 2.5s forwards;
+    }
+    
+    /* アニメーション */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    
+    /* レスポンシブ調整 */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .logo-container {
+        width: 90%;
+        max-width: 350px;
+      }
+      
+      .hero-description {
+        font-size: 1.2rem;
+      }
+      
+      .hero-section {
+        min-height: 400px;
+      }
+    }
+    
+    @media (min-width: 1200px) {
+      .logo-container {
+        width: 750px; /* 大きな画面ではさらに大きく */
+      }
+      
+      .hero-content {
+        max-width: 1000px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 2rem;
+      }
+      
+      .hero-content {
+        padding: 15px;
+      }
+      
+      .logo-container {
+        max-width: 280px;
+      }
+    }
+  </style>
+  
+  <!-- 装飾要素 -->
+  <div class="hero-decoration top-right"></div>
+  <div class="hero-decoration bottom-left"></div>
+  
+  <div class="hero-content">
+    <h1 class="hero-title">ペルーダンスアカデミー</h1>
+    <h2 class="hero-title">マリネラ・ミ・アルマ</h2>
+    <!-- テキストをロゴ画像に置き換え -->
+    <div class="logo-container">
+      <img src="{{ url_for('static', filename='images/教室ロゴ.png') }}" alt="マリネラ・ミ・アルマ ロゴ">
     </div>
-  </header>
+    <p class="hero-description">笑顔と自由のダンス</p>
+  </div>
+</header>
 
   <!-- 教室紹介セクション -->
   <section id="about" class="py-5 modern-about">
@@ -102,46 +300,109 @@
     </div>
   </section>
 
-  <!-- クラス（レッスン情報）セクション -->
-  <section id="classes" class="bg-light py-5">
-    <div class="container">
-      <h2 class="text-center mb-4">レッスンクラス</h2>
-      <div class="row">
-        <!-- 初心者クラス -->
-        <div class="col-md-6 col-lg-4">
-          <div class="card mb-4">
-            <img src="{{ url_for('static', filename='images/初心者クラス画像.jpg') }}" class="card-img-top" alt="マリネラレッスン">
-            <div class="card-body">
-              <h5 class="card-title">初心者クラス</h5>
-              <p class="card-text">初心者クラスの簡単な紹介</p>
-            </div>
+<!-- クラス（レッスン情報）セクション -->
+<section id="classes" class="bg-light py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">レッスンクラス</h2>
+    <h3 class="text-center mb-4">4種類のクラスを開講しています</h3>
+    
+    <!-- カード用のカスタムスタイル -->
+    <style>
+      /* カード全体を同じ高さに */
+      .equal-height-cards .card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      /* カード画像のコンテナを固定高さに */
+      .card-img-container {
+        height: 200px;
+        overflow: hidden;
+      }
+      
+      /* カード画像を適切に表示 */
+      .card-img-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      
+      /* カードボディを拡張して残りのスペースを埋める */
+      .equal-height-cards .card-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      /* テキストエリアを拡張 */
+      .equal-height-cards .card-text {
+        flex-grow: 1;
+      }
+    </style>
+    
+    <div class="row justify-content-center equal-height-cards">
+      <!-- 初心者クラス -->
+      <div class="col-md-6 col-lg-3 mb-4">
+        <div class="card">
+          <div class="card-img-container">
+            <img src="{{ url_for('static', filename='images/初心者クラス画像.jpg') }}" alt="マリネラレッスン">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">初心者クラス</h5>
+            <p class="card-text">初めてマリネラを踊る方や基礎から学びたい方向けのクラスです。基本的なステップや姿勢、ハンカチの使い方などを丁寧に指導します。</p>
           </div>
         </div>
-        <!-- 中級～上級者クラス  -->
-        <div class="col-md-6 col-lg-4">
-          <div class="card mb-4">
-            <img src="{{ url_for('static', filename='images/上級クラス画像.jpg') }}" class="card-img-top" alt="ストレッチ・エクササイズ">
-            <div class="card-body">
-              <h5 class="card-title">中級～上級者クラス </h5>
-              <p class="card-text">中級～上級者クラスの簡単な紹介</p>
-            </div>
+      </div>
+      
+      <!-- 中級～上級者クラス  -->
+      <div class="col-md-6 col-lg-3 mb-4">
+        <div class="card">
+          <div class="card-img-container">
+            <img src="{{ url_for('static', filename='images/上級クラス画像.jpg') }}" alt="上級クラス">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">中級～上級者クラス</h5>
+            <p class="card-text">基礎をマスターした方向けの応用クラスです。より複雑なステップや表現力を磨き、コンクールにも挑戦できるレベルを目指します。</p>
           </div>
         </div>
-        <!-- ストレッチ＆エクササイズ -->
-        <div class="col-md-6 col-lg-4">
-          <div class="card mb-4">
-            <img src="{{ url_for('static', filename='images/ストレッチクラス画像.png') }}" class="card-img-top" alt="ワークショップ & イベント">
-            <div class="card-body">
-              <h5 class="card-title">ストレッチクラス</h5>
-              <p class="card-text">ストレッチクラスの簡単な説明</p>
-            </div>
+      </div>
+      
+      <!-- ストレッチ＆エクササイズ -->
+      <div class="col-md-6 col-lg-3 mb-4">
+        <div class="card">
+          <div class="card-img-container">
+            <img src="{{ url_for('static', filename='images/ストレッチクラス画像.png') }}" alt="ストレッチクラス">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">ストレッチクラス</h5>
+            <p class="card-text">ダンスに必要な柔軟性や体幹を鍛えるクラスです。KOBA式トレーニングを取り入れ、怪我を防ぎながら美しい踊りを支える身体づくりを行います。</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- トンデーロクラス（新規追加） -->
+      <div class="col-md-6 col-lg-3 mb-4">
+        <div class="card">
+          <div class="card-img-container">
+            <img src="{{ url_for('static', filename='images/トンデーロクラス画像.jpg') }}" alt="トンデーロクラス">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">トンデーロクラス <span class="badge badge-danger">NEW</span></h5>
+            <p class="card-text">ペルー北部の伝統的なダンス「トンデーロ」を学ぶクラスです。マリネラと関連がありながらも独自の魅力を持つダンスを体験できます。</p>
           </div>
         </div>
       </div>
     </div>
-  </section>
-
-
+    
+    <!-- 料金案内ボタンを中央に配置 -->
+    <div class="row mt-4">
+      <div class="col-12 text-center">
+        <a href="/price" class="btn btn-secondary btn-lg">料金案内はこちら</a>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- 教室場所情報セクション -->
   <section id="class-locations" class="bg-light py-5">

@@ -208,7 +208,30 @@
       border: 1px solid #ffdddd;
       box-shadow: 0 3px 10px rgba(255, 82, 82, 0.1);
     }
-    
+
+    /* 画像コンテナのスタイル */
+    .card-image-container {
+      height: 200px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+    }
+
+    /* カード上部の画像のスタイル */
+    .card-top-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    /* ホバー時の効果 */
+    .card-image-container:hover .card-top-image {
+      transform: scale(1.05);
+    }
+        
     @media (max-width: 768px) {
       .hero-text h1 {
         font-size: 2.5rem;
@@ -313,6 +336,13 @@
           </div>
           <div class="col-md-6">
             <div class="mt-4 bg-light rounded p-4">
+              <!-- 追加する画像 -->
+              <div class="text-center mb-4">
+                <img src="{{ url_for('static', filename='images/マリネラ2.jpg') }}" 
+                    alt="ペルーの地域別マリネラ" 
+                    class="img-fluid rounded shadow w-100" 
+                    style="max-height: 300px; object-fit: cover;">
+              </div>
               <h4 class="text-center mb-4">マリネラの3種類</h4>
               
               <div class="row justify-content-center mb-3">
@@ -383,49 +413,57 @@
       </div>
     </section>
 
-    <!-- マリネラの特徴 -->
-    <section class="content-section">
-      <div class="container">
-        <h2 class="section-title">マリネラの魅力</h2>
-        <div class="row">
-          <div class="col-lg-4 mb-4">
-            <div class="feature-card">
-              <div class="card-body">
-                <i class="fas fa-smile icon-feature"></i>
-                <h3 class="card-title">笑顔と情熱</h3>
-                <p>女性は片手にスカートの端、片手にハンカチを持ち、裸足。男性は片手につばの広い帽子、片手にハンカチを持ちます。</p>
-                <p>そして、常に<strong>にっこりと笑って</strong>踊るのです。（陽気なペルーの人にとって『愛』とは楽しく、暖かいものなのでしょう）</p>
-              </div>
+<!-- マリネラの特徴 -->
+<section class="content-section">
+  <div class="container">
+    <h2 class="section-title">マリネラの魅力</h2>
+    <div class="row">
+      <div class="col-lg-4 mb-4">
+        <div class="feature-card">
+          <div class="card-body">
+            <!-- アイコンを画像に置き換え -->
+            <div class="card-image-container mb-4">
+              <img src="{{ url_for('static', filename='images/教室の風景.jpg') }}" alt="笑顔と情熱" class="card-top-image">
             </div>
+            <h3 class="card-title">笑顔と情熱</h3>
+            <p>女性は片手にスカートの端、片手にハンカチを持ち、裸足。男性は片手につばの広い帽子、片手にハンカチを持ちます。</p>
+            <p>そして、常に<strong>にっこりと笑って</strong>踊るのです。（陽気なペルーの人にとって『愛』とは楽しく、暖かいものなのでしょう）</p>
           </div>
-          <div class="col-lg-4 mb-4">
-            <div class="feature-card">
-              <div class="card-body">
-                <i class="fas fa-random icon-feature"></i>
-                <h3 class="card-title">自由な踊り</h3>
-                <p>ポイントで決められた動きをする以外は、リードする女性側がその場で動きを決めます。そう、ほとんどの動きが<strong>「アドリブ」</strong>なのです。</p>
-                <p>マリネラを踊ったことがある人となら、「はじめまして」で踊れてしまいます（笑）</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 mb-4">
-            <div class="feature-card">
-              <div class="card-body">
-                <i class="fas fa-comments icon-feature"></i>
-                <h3 class="card-title">対話する踊り</h3>
-                <p>手に持ったハンカチや目線、仕草でペアの男性とコミュニケーションを取り、男性はそれに合わせて動きを決め踊ります。</p>
-                <p>現地のコンクールでは当日、その場で曲が決まります。その瞬間、その時にしか踊れないダンス表現を大切にしているのですね。</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="quote-box mt-5">
-          <p class="lead mb-0">「決められた動きを練習して踊る」という、世界各地にあるダンスとは一線を画すのです。</p>
         </div>
       </div>
-    </section>
-
+      <div class="col-lg-4 mb-4">
+        <div class="feature-card">
+          <div class="card-body">
+            <!-- アイコンを画像に置き換え -->
+            <div class="card-image-container mb-4">
+              <img src="{{ url_for('static', filename='images/教室の風景.jpg') }}" alt="自由な踊り" class="card-top-image">
+            </div>
+            <h3 class="card-title">自由な踊り</h3>
+            <p>ポイントで決められた動きをする以外は、リードする女性側がその場で動きを決めます。そう、ほとんどの動きが<strong>「アドリブ」</strong>なのです。</p>
+            <p>マリネラを踊ったことがある人となら、「はじめまして」で踊れてしまいます（笑）</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 mb-4">
+        <div class="feature-card">
+          <div class="card-body">
+            <!-- アイコンを画像に置き換え -->
+            <div class="card-image-container mb-4">
+              <img src="{{ url_for('static', filename='images/教室の風景.jpg') }}" alt="対話する踊り" class="card-top-image">
+            </div>
+            <h3 class="card-title">対話する踊り</h3>
+            <p>手に持ったハンカチや目線、仕草でペアの男性とコミュニケーションを取り、男性はそれに合わせて動きを決め踊ります。</p>
+            <p>現地のコンクールでは当日、その場で曲が決まります。その瞬間、その時にしか踊れないダンス表現を大切にしているのですね。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="quote-box mt-5">
+      <p class="lead mb-0">「決められた動きを練習して踊る」という、世界各地にあるダンスとは一線を画すのです。</p>
+    </div>
+  </div>
+</section>
     <!-- 安心セクション -->
     <section class="content-section bg-light">
       <div class="container">
@@ -446,41 +484,56 @@
       </div>
     </section>
 
-    <!-- マリネラの多様性 -->
-    <section class="content-section">
-      <div class="container">
-        <h2 class="section-title">あなたらしく踊れるマリネラ</h2>
-        <div class="row">
-          <div class="col-md-4 mb-4">
-            <div class="card feature-card">
-              <div class="card-body">
-                <h3 class="card-title"><i class="fas fa-user mr-2"></i>シングル</h3>
-                <p>基本はペアの踊りですが、日本のコンクールではシングル部門が開かれることも多いので、一人で踊るマリネラにも注目が集まっています。</p>
-                <p>「初めからペアのダンスは緊張する……」という方も、安心して始めることができますよ。（実際講師も、国内コンクールのシングル部門で賞をいただいたことがあります）</p>
-              </div>
+<!-- マリネラの多様性 -->
+<section class="content-section">
+  <div class="container">
+    <h2 class="section-title">あなたらしく踊れるマリネラ</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="card feature-card">
+          <div class="card-body">
+            <!-- 画像を追加 -->
+            <div class="card-image-container mb-4">
+              <img src="{{ url_for('static', filename='images/教室の風景.jpg') }}" alt="シングルで踊るマリネラ" class="card-top-image">
             </div>
-          </div>
-          <div class="col-md-4 mb-4">
-            <div class="card feature-card">
-              <div class="card-body">
-                <h3 class="card-title"><i class="fas fa-users mr-2"></i>グループ</h3>
-                <p>女性だけ、男性だけ、男女混合のグループで踊ることもあるので、仲の良いお友達同士でグループを組んで踊る、なんていうのも楽しいですね。</p>
-                <p>こちらは大人数ならではの迫力とフォーメーションの美しさが見ものです。</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 mb-4">
-            <div class="card feature-card">
-              <div class="card-body">
-                <h3 class="card-title"><i class="fas fa-heart mr-2"></i>すべての世代</h3>
-                <p>子供、若者、大人、シニアと、各世代で表現される<strong>『愛』</strong>は様々。楽しくにぎやか、華々しく情熱的、しっとり、ゆったり。</p>
-                <p>あなたにしか表現できない<strong>『マリネラ』</strong>が、きっとあります。</p>
-              </div>
-            </div>
+            <!-- タイトルからアイコンを削除 -->
+            <h3 class="card-title">シングル</h3>
+            <p>基本はペアの踊りですが、日本のコンクールではシングル部門が開かれることも多いので、一人で踊るマリネラにも注目が集まっています。</p>
+            <p>「初めからペアのダンスは緊張する……」という方も、安心して始めることができますよ。（実際講師も、国内コンクールのシングル部門で賞をいただいたことがあります）</p>
           </div>
         </div>
       </div>
-    </section>
+      <div class="col-md-4 mb-4">
+        <div class="card feature-card">
+          <div class="card-body">
+            <!-- 画像を追加 -->
+            <div class="card-image-container mb-4">
+              <img src="{{ url_for('static', filename='images/教室の風景.jpg') }}" alt="グループで踊るマリネラ" class="card-top-image">
+            </div>
+            <!-- タイトルからアイコンを削除 -->
+            <h3 class="card-title">グループ</h3>
+            <p>女性だけ、男性だけ、男女混合のグループで踊ることもあるので、仲の良いお友達同士でグループを組んで踊る、なんていうのも楽しいですね。</p>
+            <p>こちらは大人数ならではの迫力とフォーメーションの美しさが見ものです。</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card feature-card">
+          <div class="card-body">
+            <!-- 画像を追加 -->
+            <div class="card-image-container mb-4">
+              <img src="{{ url_for('static', filename='images/教室の風景.jpg') }}" alt="様々な世代のマリネラ" class="card-top-image">
+            </div>
+            <!-- タイトルからアイコンを削除 -->
+            <h3 class="card-title">すべての世代</h3>
+            <p>子供、若者、大人、シニアと、各世代で表現される<strong>『愛』</strong>は様々。楽しくにぎやか、華々しく情熱的、しっとり、ゆったり。</p>
+            <p>あなたにしか表現できない<strong>『マリネラ』</strong>が、きっとあります。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
     <!-- CTA -->
     <section class="action-section">
