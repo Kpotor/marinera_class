@@ -5,6 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, TextAreaField, SubmitField
+from wtforms import SelectField
 from wtforms.validators import DataRequired, Email, Length
 import os
 import click
@@ -56,6 +57,19 @@ class NewsForm(FlaskForm):
     title = StringField('タイトル', validators=[DataRequired(), Length(min=1, max=100)])
     content = TextAreaField('内容', validators=[DataRequired()])
     submit = SubmitField('投稿')
+
+# 既存のフォームクラスの後に以下を追加
+class ContactForm(FlaskForm):
+    name = StringField('お名前', validators=[DataRequired()])
+    email = StringField('メールアドレス', validators=[DataRequired(), Email()])
+    phone = StringField('電話番号（任意）')
+    subject = SelectField('お問い合わせの種類', 
+                         choices=[('general', '一般的なお問い合わせ'), 
+                                  ('lesson', 'レッスンについて'),
+                                  ('trial', '体験レッスン申し込み'),
+                                  ('other', 'その他')])
+    message = TextAreaField('メッセージ', validators=[DataRequired()])
+    submit = SubmitField('送信する')
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -157,6 +171,17 @@ def delete_news(news_id):
     db.session.commit()
     flash('新着情報が削除されました！', 'success')
     return redirect(url_for('admin_dashboard'))
+
+# 既存のルートの後に以下を追加
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    form = ContactForm()
+    if form.validate_on_submit():
+        # ここでフォームの処理を行います（例：メール送信やデータベースへの保存）
+        # 実際の実装ではメール送信機能を追加する必要があります
+        flash('お問い合わせを受け付けました。ありがとうございます！', 'success')
+        return redirect(url_for('contact'))
+    return render_template('contact.html', form=form)
 
 # CLIコマンドを使用して管理者ユーザーを作成
 @app.cli.command('create-admin')

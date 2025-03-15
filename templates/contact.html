@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>お問い合わせ | マリネラ・ミ・アルマ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <!-- カスタムCSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    /* お問い合わせページ専用のスタイル */
+    .contact-hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ url_for("static", filename="images/hero.jpg") }}') center center no-repeat;
+      background-size: cover;
+      height: 50vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-top: 56px; /* ナビゲーションバーの高さ分 */
+    }
+    
+    .contact-form-container {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      padding: 2rem;
+      margin-top: -50px;
+      position: relative;
+      z-index: 10;
+    }
+    
+    .form-group label {
+      font-weight: 500;
+    }
+    
+    .form-control:focus {
+      border-color: #FF5252;
+      box-shadow: 0 0 0 0.2rem rgba(255, 82, 82, 0.25);
+    }
+    
+    .btn-submit {
+      background-color: #FF5252;
+      color: white;
+      padding: 10px 30px;
+      border-radius: 5px;
+      border: none;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-submit:hover {
+      background-color: #FF3333;
+      box-shadow: 0 5px 15px rgba(255, 82, 82, 0.3);
+      color: white;
+    }
+    
+    .contact-info-card {
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      padding: 2rem;
+      height: 100%;
+    }
+    
+    .contact-icon {
+      font-size: 2.5rem;
+      color: #FF5252;
+      margin-bottom: 1rem;
+    }
+    
+    .contact-method {
+      margin-bottom: 1.5rem;
+    }
+    
+    .contact-method h5 {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .section-title {
+      position: relative;
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+    
+    .section-title::after {
+      content: "";
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(to right, #FF5252, #FC7676);
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+  <!-- ナビゲーションバー -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+    <!-- ロゴ画像を配置 -->
+    <a class="navbar-brand" href="/">
+      <img src="{{ url_for('static', filename='images/教室ロゴ.png') }}"
+           alt="マリネラ・ミ・アルマ ロゴ"
+           style="height: 40px; margin-right: 10px;">
+      マリネラ・ミ・アルマ Marinera mi alma
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/#about">教室紹介</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/#instructors">講師紹介</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/#classes">クラス</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/#class-locations">場所</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/#schedule">スケジュール</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/price">料金案内</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/contact">お問い合わせ <span class="sr-only">(現位置)</span></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ヒーローセクション -->
+  <header class="contact-hero">
+    <div class="container text-center text-white">
+      <h1 class="display-4">お問い合わせ</h1>
+      <p class="lead">Contact - お気軽にご連絡ください</p>
+    </div>
+  </header>
+
+  <!-- メインコンテンツ -->
+  <main>
+    <section class="py-5">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="contact-form-container">
+              <!-- フラッシュメッセージ -->
+              {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                  {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                      {{ message }}
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                  {% endfor %}
+                {% endif %}
+              {% endwith %}
+              
+              <h2 class="section-title">お問い合わせフォーム</h2>
+              
+              <!-- 問い合わせフォーム -->
+              <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      {{ form.name.label(class="form-control-label") }}
+                      {% if form.name.errors %}
+                        {{ form.name(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                          {% for error in form.name.errors %}
+                            <span>{{ error }}</span>
+                          {% endfor %}
+                        </div>
+                      {% else %}
+                        {{ form.name(class="form-control") }}
+                      {% endif %}
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      {{ form.email.label(class="form-control-label") }}
+                      {% if form.email.errors %}
+                        {{ form.email(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                          {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                          {% endfor %}
+                        </div>
+                      {% else %}
+                        {{ form.email(class="form-control") }}
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      {{ form.phone.label(class="form-control-label") }}
+                      {{ form.phone(class="form-control") }}
+                      <small class="form-text text-muted">任意ですが、ご記入いただくとお返事がスムーズです</small>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      {{ form.subject.label(class="form-control-label") }}
+                      {% if form.subject.errors %}
+                        {{ form.subject(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                          {% for error in form.subject.errors %}
+                            <span>{{ error }}</span>
+                          {% endfor %}
+                        </div>
+                      {% else %}
+                        {{ form.subject(class="form-control") }}
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  {{ form.message.label(class="form-control-label") }}
+                  {% if form.message.errors %}
+                    {{ form.message(class="form-control is-invalid", rows=6) }}
+                    <div class="invalid-feedback">
+                      {% for error in form.message.errors %}
+                        <span>{{ error }}</span>
+                      {% endfor %}
+                    </div>
+                  {% else %}
+                    {{ form.message(class="form-control", rows=6) }}
+                  {% endif %}
+                </div>
+                <div class="form-group text-center mt-4">
+                  {{ form.submit(class="btn btn-submit btn-lg") }}
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 他の連絡方法 -->
+    <section class="py-5 bg-light">
+      <div class="container">
+        <h2 class="section-title text-center mb-5">他の連絡方法</h2>
+        <div class="row">
+          <!-- メール -->
+          <div class="col-md-4 mb-4">
+            <div class="contact-info-card text-center">
+              <i class="fas fa-envelope contact-icon"></i>
+              <div class="contact-method">
+                <h5>メール</h5>
+                <p>marineramialma@gmail.com</p>
+              </div>
+              <a href="mailto:marineramialma@gmail.com" class="btn btn-outline-secondary">メールを送る</a>
+            </div>
+          </div>
+          
+          <!-- SNS -->
+          <div class="col-md-4 mb-4">
+            <div class="contact-info-card text-center">
+              <i class="fas fa-hashtag contact-icon"></i>
+              <div class="contact-method">
+                <h5>SNS</h5>
+                <p>各種SNSでもメッセージをお待ちしています</p>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-3">
+                  <a href="https://www.instagram.com/marinerachifumifukuda/" target="_blank">
+                    <img src="{{ url_for('static', filename='images/Instagram_Glyph_Gradient.png') }}" alt="Instagram" class="img-fluid" style="max-width: 40px;">
+                  </a>
+                </div>
+                <div class="col-3">
+                  <a href="https://twitter.com/marineramialma" target="_blank">
+                    <img src="{{ url_for('static', filename='images/logo-black.png') }}" alt="X" class="img-fluid" style="max-width: 40px;">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 電話 -->
+          <div class="col-md-4 mb-4">
+            <div class="contact-info-card text-center">
+              <i class="fas fa-phone-alt contact-icon"></i>
+              <div class="contact-method">
+                <h5>電話</h5>
+                <p>090-XXXX-XXXX</p>
+                <small class="text-muted">※レッスン中は電話に出られない場合があります</small>
+              </div>
+              <a href="tel:090XXXXXXXX" class="btn btn-outline-secondary">電話をかける</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 体験レッスン案内 -->
+    <section class="py-5">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 mb-4 mb-lg-0">
+            <img src="{{ url_for('static', filename='images/マリネラ1.jpg') }}" alt="体験レッスン" class="img-fluid rounded shadow">
+          </div>
+          <div class="col-lg-6">
+            <h2 class="section-title text-left">体験レッスンについて</h2>
+            <p class="lead">マリネラを初めて体験してみませんか？</p>
+            <p>初回体験レッスンは<strong>2,000円</strong>で、どのクラスでも受講可能です。お気軽にお問い合わせください！</p>
+            <ul class="list-unstyled">
+              <li><i class="fas fa-check-circle text-success mr-2"></i>事前予約制となっています</li>
+              <li><i class="fas fa-check-circle text-success mr-2"></i>動きやすい服装でお越しください</li>
+              <li><i class="fas fa-check-circle text-success mr-2"></i>女性は素足、もしくはダンスシューズでレッスンします</li>
+              <li><i class="fas fa-check-circle text-success mr-2"></i>飲み物をご持参ください</li>
+            </ul>
+            <a href="#" class="btn btn-submit mt-3" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">体験レッスンを申し込む</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Q&A -->
+    <section class="py-5 bg-light">
+      <div class="container">
+        <h2 class="section-title text-center">よくある質問</h2>
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="accordion" id="accordionFAQ">
+              <!-- 質問1 -->
+              <div class="card mb-3">
+                <div class="card-header bg-white" id="headingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link text-dark text-decoration-none w-100 text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      <i class="fas fa-question-circle mr-2" style="color: #FF5252;"></i>
+                      ダンス経験がない初心者でも大丈夫ですか？
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionFAQ">
+                  <div class="card-body">
+                    はい、もちろん大丈夫です！初心者クラスでは基本的なステップから丁寧に指導しています。多くの生徒さんがダンス未経験から始めていますので、ご安心ください。
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 質問2 -->
+              <div class="card mb-3">
+                <div class="card-header bg-white" id="headingTwo">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link text-dark text-decoration-none w-100 text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      <i class="fas fa-question-circle mr-2" style="color: #FF5252;"></i>
+                      レッスンに必要な持ち物はありますか？
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionFAQ">
+                  <div class="card-body">
+                    基本的には動きやすい服装と飲み物をお持ちください。女性は素足またはヒールのダンスシューズで踊ります。ハンカチは教室でお貸しすることもできますが、ご自身のものをお持ちいただいても構いません。
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 質問3 -->
+              <div class="card mb-3">
+                <div class="card-header bg-white" id="headingThree">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link text-dark text-decoration-none w-100 text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      <i class="fas fa-question-circle mr-2" style="color: #FF5252;"></i>
+                      どのくらいの頻度で通えばいいですか？
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionFAQ">
+                  <div class="card-body">
+                    基本的には週1回のペースで通われる方が多いですが、ご自身のペースに合わせて調整していただけます。月謝制は月4回のレッスンを想定していますが、回数券もございますので、お仕事やご予定に合わせて柔軟に通うことも可能です。
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 質問4 -->
+              <div class="card">
+                <div class="card-header bg-white" id="headingFour">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link text-dark text-decoration-none w-100 text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                      <i class="fas fa-question-circle mr-2" style="color: #FF5252;"></i>
+                      男性も参加できますか？
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionFAQ">
+                  <div class="card-body">
+                    はい、もちろん男性も歓迎しています！マリネラは本来男女のペアダンスですので、男性の生徒さんも大歓迎です。初心者向けのクラスもございますので、お気軽にお問い合わせください。
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- フッター -->
+  <footer class="py-4 bg-secondary text-white text-center">
+    <div class="container">
+      <!-- SNSリンクを追加（直接画像を使用） -->
+      <div class="social-links mb-3">
+        <a href="https://www.youtube.com/@Marineramialma" target="_blank" class="mx-2">
+          <img src="{{ url_for('static', filename='images/yt_icon_rgb.png') }}" alt="YouTube" style="width:64px">
+        </a>
+        <a href="https://www.instagram.com/marinerachifumifukuda//" target="_blank" class="mx-2">
+          <img src="{{ url_for('static', filename='images/Instagram_Glyph_Gradient.png') }}" alt="Instagram" style="width:64px">
+        </a>
+        <a href="https://twitter.com/marineramialma" target="_blank" class="mx-2">
+          <img src="{{ url_for('static', filename='images/logo-black.png') }}" alt="X" style="width:64px">
+        </a>
+        <a href="https://www.tiktok.com/@marineramialma?lang=ja-JP" target="_blank" class="mx-2">
+          <img src="{{ url_for('static', filename='images/TikTok_Icon_Black_Circle.png') }}" alt="X" style="width:64px">
+        </a>
+      </div>
+      
+      <!-- ここに同じロゴを配置 -->
+      <img src="{{ url_for('static', filename='images/教室ロゴ.png') }}"
+           alt="マリネラ・ミ・アルマ ロゴ"
+           style="height: 300px; margin-bottom: 10px;">
+      <p class="mb-0">&copy; 2025 マリネラ・ミ・アルマ Marinera mi alma. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- BootstrapのJSと依存ライブラリ -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
